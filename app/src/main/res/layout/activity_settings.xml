@@ -4,6 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SettingsActivity">
+    tools:context=".activities.SettingsActivity"
+    android:background="@color/backgroundColor">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBackgroundColor"
+        android:theme="@style/CustomToolBarStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            android:textColor="@color/toolbarTextAndIconColor"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_alternates_medium" />
+
+    </androidx.appcompat.widget.Toolbar>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

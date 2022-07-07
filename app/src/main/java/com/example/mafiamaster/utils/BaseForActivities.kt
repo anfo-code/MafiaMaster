@@ -12,7 +12,7 @@ open class BaseForActivities: AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
 
 
-    fun turnOffDarkMode() {
+    fun turnOnDarkMode() {
         val appSettingPrefs: SharedPreferences = getSharedPreferences("AppSettingPrefs", 0)
         val sharedPreferencesEditor: SharedPreferences.Editor = appSettingPrefs.edit()
 

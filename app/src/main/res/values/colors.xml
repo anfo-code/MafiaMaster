@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="backgroundColor">#1F1F1F</color>
+    <color name="buttonTextColor">#ffffff</color>
+    <color name="buttonBorderColor">#ffffff</color>
+    <color name="circularIconBackgroundColor">#ffffff</color>
+    <color name="circularIconForegroundColor">#000000</color>
+    <color name="toolbarTextAndIconColor">#ffffff</color>
+    <color name="toolbarBackgroundColor">#1b1b1b</color>
+    <color name="timerProgressLineColor">#1F1F1F</color>
+    <color name="timerLineColor">#FFFFFF</color>
+    <color name="mainTextColor">#FFFFFF</color>
+
+
+
+
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="buttonTextSize">22sp</dimen>
+    <dimen name="mainTextSize">42sp</dimen>
+    <dimen name="secondaryTextSize">22sp</dimen>
+    <dimen name="timerProgressBarSize">190dp</dimen>
+    <dimen name="timerCircularBackgroundSize">150dp</dimen>
+    <dimen name="timerTextSize">52dp</dimen>
+    <dimen name="timerButtonIconSize">30dp</dimen>
+    <dimen name="circularIconForegroundSize">90dp</dimen>
+    <dimen name="smallerCircularIconForegroundSize">60dp</dimen>
+    <dimen name="buttonsAddRemoveSize">20dp</dimen>
+    <dimen name="marginBetweenRoleNameAndRoleCount">25dp</dimen>
+    <dimen name="marginForCountTextViewsWithoutButtonsInGameSettingActivity">15dp</dimen>
+    <dimen name="textFromIconDistanceInGameSettingActivity">15dp</dimen>
+    <dimen name="roleNamesLengthInPixelsInGameSettingActivity">90dp</dimen>
+</resources>

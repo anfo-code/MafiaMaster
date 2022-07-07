@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.RulesActivity"
-    android:background="@color/backgroundColor">
+    tools:context=".activities.PlayersRolesActivity"
+    android:background="@color/backgroundColor"
+    >
 
     <FrameLayout
-        android:id="@+id/frameLayoutOfToolbar"
+        android:id="@+id/toolbarFrameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarMain"
             android:layout_width="match_parent"
@@ -20,30 +23,31 @@
             android:theme="@style/CustomToolBarStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rules"
-                android:textColor="@color/toolbarTextAndIconColor"
                 android:layout_gravity="center"
-                android:textSize="20sp"
-                android:fontFamily="@font/montserrat_alternates_medium" />
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/setting_the_roles"
+                android:textColor="@color/toolbarTextAndIconColor"
+                android:textSize="20sp" />
 
         </androidx.appcompat.widget.Toolbar>
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frameLayoutOfToolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarFrameLayout">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/playerRolesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
 
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

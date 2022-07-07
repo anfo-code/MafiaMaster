@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context=".activities.GameSettingActivity">
+
+    <FrameLayout
+        android:id="@+id/toolbarFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarMain"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbarBackgroundColor"
+            android:theme="@style/CustomToolBarStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/setting_the_roles"
+                android:textColor="@color/toolbarTextAndIconColor"
+                android:textSize="20sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/rectangular_rounded_shape"
+        app:layout_constraintBottom_toTopOf="@id/buttonStartGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarFrameLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clCiviliansCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clCiviliansIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/circle_for_icons"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/smallerCircularIconForegroundSize"
+                        android:layout_height="@dimen/smallerCircularIconForegroundSize"
+                        android:contentDescription="@string/icon"
+                        android:foreground="@drawable/ic_commonfolk"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/playersTextView"
+                    android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_alternates_medium"
+                    android:text="@string/players"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="@dimen/secondaryTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/clCiviliansIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutForChoosingCiviliansAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/playersTextView"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivAddPlayers"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPlayersCount"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="@dimen/mainTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivRemovePlayers"
+                        app:layout_constraintStart_toEndOf="@+id/ivAddPlayers"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivRemovePlayers"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:layout_marginEnd="15dp"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_remove"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clMafiaCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clCiviliansCount">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clMafiaIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/circle_for_icons"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/smallerCircularIconForegroundSize"
+                        android:layout_height="@dimen/smallerCircularIconForegroundSize"
+                        android:contentDescription="@string/icon"
+                        android:foreground="@drawable/ic_mafia"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/mafiaTextView"
+                    android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_alternates_medium"
+                    android:text="@string/mafia"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="@dimen/secondaryTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/clMafiaIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutForChoosingAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/mafiaTextView"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:id="@+id/tvMafiaCount"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="@dimen/marginForCountTextViewsWithoutButtonsInGameSettingActivity"
+                        android:gravity="center"
+                        android:text="1"
+
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="@dimen/mainTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clDonsCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clMafiaCount">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clDonIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/circle_for_icons"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/smallerCircularIconForegroundSize"
+                        android:layout_height="@dimen/smallerCircularIconForegroundSize"
+                        android:contentDescription="@string/icon"
+                        android:foreground="@drawable/ic_don"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/donTextView"
+                    android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_alternates_medium"
+                    android:text="@string/don"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="@dimen/secondaryTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/clDonIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutForChoosingDonsAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/donTextView"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:id="@+id/tvDonCount"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="@dimen/marginForCountTextViewsWithoutButtonsInGameSettingActivity"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="@dimen/mainTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clWhoresCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clDonsCount">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clWhoreIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/circle_for_icons"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/smallerCircularIconForegroundSize"
+                        android:layout_height="@dimen/smallerCircularIconForegroundSize"
+                        android:contentDescription="@string/icon"
+                        android:foreground="@drawable/ic_whore"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/whoresTextView"
+                    android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_alternates_medium"
+                    android:text="@string/whore"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="@dimen/secondaryTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/clWhoreIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutForChoosingWhoresAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/whoresTextView"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivAddWhores"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvWhoresCount"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="@dimen/mainTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivRemoveWhores"
+                        app:layout_constraintStart_toEndOf="@+id/ivAddWhores"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivRemoveWhores"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:layout_marginEnd="15dp"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_remove"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSheriffsCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clWhoresCount">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clSheriffIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/circle_for_icons"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/smallerCircularIconForegroundSize"
+                        android:layout_height="@dimen/smallerCircularIconForegroundSize"
+                        android:contentDescription="@string/icon"
+                        android:foreground="@drawable/ic_sheriff"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/sheriffTextView"
+                    android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_alternates_medium"
+                    android:text="@string/sheriff"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="@dimen/secondaryTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/clSheriffIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutForChoosingSheriffsAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sheriffTextView"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivAddSheriffs"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSheriffsCount"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="@dimen/mainTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivRemoveSheriffs"
+                        app:layout_constraintStart_toEndOf="@+id/ivAddSheriffs"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivRemoveSheriffs"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:layout_marginEnd="15dp"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_remove"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clDoctorsCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clSheriffsCount">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clDoctorIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/circle_for_icons"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/smallerCircularIconForegroundSize"
+                        android:layout_height="@dimen/smallerCircularIconForegroundSize"
+                        android:contentDescription="@string/icon"
+                        android:foreground="@drawable/ic_doctor"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/doctorTextView"
+                    android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_alternates_medium"
+                    android:text="@string/doctor"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="@dimen/secondaryTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/clDoctorIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutForChoosingDoctorsAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/doctorTextView"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivAddDoctors"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvDoctorsCount"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="@dimen/mainTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivRemoveDoctors"
+                        app:layout_constraintStart_toEndOf="@+id/ivAddDoctors"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivRemoveDoctors"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:layout_marginEnd="15dp"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_remove"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clManiacsCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clDoctorsCount">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clManiacIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/circle_for_icons"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/smallerCircularIconForegroundSize"
+                        android:layout_height="@dimen/smallerCircularIconForegroundSize"
+                        android:contentDescription="@string/icon"
+                        android:foreground="@drawable/ic_maniac"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/maniacTextView"
+                    android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_alternates_medium"
+                    android:text="@string/maniac"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="@dimen/secondaryTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/clManiacIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutForChoosingManiacsAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/maniacTextView"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivAddManiacs"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvManiacsCount"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="@dimen/mainTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivRemoveManiacs"
+                        app:layout_constraintStart_toEndOf="@+id/ivAddManiacs"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivRemoveManiacs"
+                        android:layout_width="@dimen/buttonsAddRemoveSize"
+                        android:layout_height="@dimen/buttonsAddRemoveSize"
+                        android:layout_marginEnd="15dp"
+                        android:background="@color/buttonBorderColor"
+                        android:foreground="@drawable/ic_remove"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/buttonStartGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="36dp"
+        android:background="@drawable/rectangular_rounded_shape"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingHorizontal="2dp"
+        android:text="@string/start_game"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
