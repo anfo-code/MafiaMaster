@@ -9,8 +9,6 @@ import com.example.mafiamaster.utils.BaseForActivities
 
 class MenuActivity : BaseForActivities(), View.OnClickListener {
 
-    //TODO Finish UI for activities, and make a commit stating, that UI was added
-
     private lateinit var binding: ActivityMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

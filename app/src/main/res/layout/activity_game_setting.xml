@@ -306,7 +306,7 @@
                         android:layout_width="@dimen/smallerCircularIconForegroundSize"
                         android:layout_height="@dimen/smallerCircularIconForegroundSize"
                         android:contentDescription="@string/icon"
-                        android:foreground="@drawable/ic_whore"
+                        android:foreground="@drawable/ic_mistress"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -319,7 +319,7 @@
                     android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/montserrat_alternates_medium"
-                    android:text="@string/whore"
+                    android:text="@string/mistress"
                     android:textColor="@color/mainTextColor"
                     android:textSize="@dimen/secondaryTextSize"
                     app:layout_constraintStart_toEndOf="@+id/clWhoreIcon"

@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/frameLayoutOfToolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarMain"
@@ -34,16 +34,260 @@
         </androidx.appcompat.widget.Toolbar>
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frameLayoutOfToolbar">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="start"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/rules"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/rules_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/game_is_split_on_two_parts"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/game_is_split_on_two_parts_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/don_mafia"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/don_mafia_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/mafia"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/mafia_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/mistress"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/mistress_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/remark_about_mistress"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/remark_about_mistress_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/civilians_team"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/civilians_team_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/doctor"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/doctor_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/maniac"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/maniac_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/sheriff"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/sheriff_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/civilian"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/mainTextSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:text="@string/civilians_explanation"
+                android:textColor="@color/circularIconBackgroundColor"
+                android:textSize="@dimen/secondaryTextSize"
+                android:layout_marginStart="20dp"
+                />
 
 
-    </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
