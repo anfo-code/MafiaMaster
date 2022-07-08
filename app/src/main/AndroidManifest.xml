@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBarTheme">
         <activity
+            android:name=".activities.FoulsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.PlayersRolesActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

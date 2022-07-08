@@ -18,6 +18,9 @@ class MenuActivity : BaseForActivities(), View.OnClickListener {
 
         turnOnDarkMode()
 
+        binding.buttonStartGame.setOnClickListener(this)
+        binding.buttonSettings.setOnClickListener(this)
+        binding.buttonRules.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
