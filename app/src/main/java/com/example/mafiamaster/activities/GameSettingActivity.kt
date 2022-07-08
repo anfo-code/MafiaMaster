@@ -1,10 +1,12 @@
 package com.example.mafiamaster.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityGameSettingBinding
 import com.example.mafiamaster.model.RolesCountHandler
+import com.example.mafiamaster.model.RolesGive
 import com.example.mafiamaster.utils.BaseForActivities
 
 class GameSettingActivity : BaseForActivities(), View.OnClickListener {
@@ -97,6 +99,9 @@ class GameSettingActivity : BaseForActivities(), View.OnClickListener {
     }
 
     private fun startTheGame() {
-        
+        val rolesGive = RolesGive(rolesCountHandler)
+        val intent = Intent(this, RolesActivity::class.java)
+        intent.putExtra("RolesMap", rolesGive.getPlayersMap())
+        startActivity(intent)
     }
 }
