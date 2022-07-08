@@ -37,4 +37,5 @@ open class BaseForActivities: AppCompatActivity() {
                 .postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
         }
     }
+
 }

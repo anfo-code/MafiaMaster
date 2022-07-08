@@ -13,5 +13,5 @@
     <dimen name="marginBetweenRoleNameAndRoleCount">25dp</dimen>
     <dimen name="marginForCountTextViewsWithoutButtonsInGameSettingActivity">15dp</dimen>
     <dimen name="textFromIconDistanceInGameSettingActivity">15dp</dimen>
-    <dimen name="roleNamesLengthInPixelsInGameSettingActivity">90dp</dimen>
+    <dimen name="roleNamesLengthInPixelsInGameSettingActivity">110dp</dimen>
 </resources>

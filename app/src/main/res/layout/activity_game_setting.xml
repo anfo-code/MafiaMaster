@@ -285,7 +285,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clWhoresCount"
+                android:id="@+id/clMistressesCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="8dp"
@@ -293,7 +293,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/clDonsCount">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clWhoreIcon"
+                    android:id="@+id/clMistressIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
@@ -313,7 +313,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/whoresTextView"
+                    android:id="@+id/mistressTextView"
                     android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
@@ -322,21 +322,21 @@
                     android:text="@string/mistress"
                     android:textColor="@color/mainTextColor"
                     android:textSize="@dimen/secondaryTextSize"
-                    app:layout_constraintStart_toEndOf="@+id/clWhoreIcon"
+                    app:layout_constraintStart_toEndOf="@+id/clMistressIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayoutForChoosingWhoresAmount"
+                    android:id="@+id/constraintLayoutForChoosingMistressesAmount"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/whoresTextView"
+                    app:layout_constraintStart_toEndOf="@+id/mistressTextView"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/ivAddWhores"
+                        android:id="@+id/ivAddMistress"
                         android:layout_width="@dimen/buttonsAddRemoveSize"
                         android:layout_height="@dimen/buttonsAddRemoveSize"
                         android:background="@color/buttonBorderColor"
@@ -346,7 +346,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvWhoresCount"
+                        android:id="@+id/tvMistressesCount"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:gravity="center"
@@ -354,12 +354,12 @@
                         android:textColor="@color/mainTextColor"
                         android:textSize="@dimen/mainTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/ivRemoveWhores"
-                        app:layout_constraintStart_toEndOf="@+id/ivAddWhores"
+                        app:layout_constraintEnd_toStartOf="@+id/ivRemoveMistress"
+                        app:layout_constraintStart_toEndOf="@+id/ivAddMistress"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/ivRemoveWhores"
+                        android:id="@+id/ivRemoveMistress"
                         android:layout_width="@dimen/buttonsAddRemoveSize"
                         android:layout_height="@dimen/buttonsAddRemoveSize"
                         android:layout_marginEnd="15dp"
@@ -380,7 +380,7 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/clWhoresCount">
+                app:layout_constraintTop_toBottomOf="@+id/clMistressesCount">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clSheriffIcon"
