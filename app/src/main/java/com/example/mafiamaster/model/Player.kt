@@ -13,4 +13,5 @@ data class Player(
     var blocksStreak: Int = 0,
     var foulsCount: Int = 0,
     var isThirdFoulActionCompleted: Boolean = false,
+    var votesAmount: Int = 0
 ) : Serializable

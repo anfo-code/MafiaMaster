@@ -50,4 +50,5 @@
     <string name="edit_fouls_of_players">Редагування фолів</string>
     <string name="your_role_is">Ваша роль</string>
     <string name="next_player">Наступний гравець</string>
+    <string name="end_voting">Закінчити голосування</string>
 </resources>

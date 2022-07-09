@@ -167,6 +167,18 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/killedPlayersLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="25dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerNumberTextView">
+
+
     <TextView
         android:id="@+id/killedPlayersRoleTextView"
         android:layout_width="wrap_content"
@@ -175,14 +187,30 @@
         android:text="@string/maniac"
         android:textColor="@color/circularIconBackgroundColor"
         android:textSize="42sp"
-        android:visibility="gone"
-        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerNumberTextView" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+            android:id="@+id/killedPlayerRoleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:background="@drawable/rectangular_rounded_shape"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingHorizontal="2dp"
+            android:text="@string/confirm"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="@dimen/buttonTextSize"
+            android:layout_marginBottom="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/actionLayout"
+        android:id="@+id/nightActionLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="30dp"
@@ -193,19 +221,19 @@
         app:layout_constraintTop_toBottomOf="@+id/playerNumberTextView">
 
         <ScrollView
-            android:id="@+id/scrollView"
+            android:id="@+id/nightActionScrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/rectangular_rounded_shape"
-            app:layout_constraintBottom_toTopOf="@+id/buttonAction"
+            app:layout_constraintBottom_toTopOf="@+id/nightActionButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/actionsRecyclerView"
+                android:id="@+id/nightActionsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -213,14 +241,14 @@
 
 
         <Button
-            android:id="@+id/buttonAction"
+            android:id="@+id/nightActionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
             android:paddingHorizontal="2dp"
-            android:text="@string/start_game"
+            android:text="@string/confirm"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
             android:layout_marginBottom="60dp"
@@ -246,9 +274,9 @@
             android:id="@+id/votingScrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="30dp"
             android:background="@drawable/rectangular_rounded_shape"
-            app:layout_constraintBottom_toTopOf="@+id/buttonAction"
+            app:layout_constraintBottom_toTopOf="@+id/buttonVoting"
+            android:layout_marginBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -269,8 +297,8 @@
             android:layout_marginHorizontal="36dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingHorizontal="2dp"
-            android:text="@string/start_game"
+            android:paddingVertical="2dp"
+            android:text="@string/end_voting"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
             android:layout_marginBottom="60dp"
@@ -285,6 +313,7 @@
         android:id="@+id/foulConstraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
