@@ -1,14 +1,17 @@
 package com.example.mafiamaster.utils
 
+import android.content.Context
+import android.media.MediaPlayer
 import android.os.CountDownTimer
-import com.example.mafiamaster.activities.GameActivity
+import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityGameBinding
 import com.example.mafiamaster.model.GameMaster
 import java.util.*
 
 class TimerHandler(
     private val binding: ActivityGameBinding,
-    private val gameMaster: GameMaster
+    private val gameMaster: GameMaster,
+    private val context: Context
 ) {
     private lateinit var timer : CountDownTimer
     private var currentTimerTime = 0
@@ -33,6 +36,7 @@ class TimerHandler(
                 currentTimerTimeProgress = 0
                 currentTimerTime = 0
                 gameMaster.timerFinished()
+                MediaPlayer.create(context, R.raw.timer_finish_sound).start()
             }
         }.start()
     }

@@ -24,7 +24,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
         getPlayersMapFromIntent()
         gameMaster = GameMaster(playersMap,this)
-        timerHandler = TimerHandler(binding, gameMaster)
+        timerHandler = TimerHandler(binding, gameMaster, this)
 
         binding.buttonFinishTheNightOfGettingAcquaintances.setOnClickListener(this)
         binding.constraintLayoutPauseStart.setOnClickListener(this)
