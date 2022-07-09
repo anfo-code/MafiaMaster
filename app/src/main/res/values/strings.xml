@@ -9,7 +9,7 @@
     <string name="night">Ніч</string>
     <string name="player">Гравець %1$d</string>
     <string name="mafia_kills">Мафія вбиває</string>
-    <string name="whore_pays_a_visit">Путана відвідує</string>
+    <string name="mistress_pays_a_visit">Путана відвідує</string>
     <string name="doctor_heals">Доктор лікує</string>
     <string name="sheriff_checks">Комісар перевіряє</string>
     <string name="voting">Голосування</string>
@@ -52,4 +52,5 @@
     <string name="next_player">Наступний гравець</string>
     <string name="end_voting">Закінчити голосування</string>
     <string name="end_the_night_of_getting_acquaintances">Закінчити ніч знайомств</string>
+    <string name="black_players_get_acquaintances">Чорні гравці знайомляться</string>
 </resources>

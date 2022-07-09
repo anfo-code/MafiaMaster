@@ -6,9 +6,9 @@ import com.example.mafiamaster.utils.GameFlowConstants
 class GameMaster(
     private val playersMap: HashMap<Int, Player>,
     private val activity: GameActivity,
-    private var isGameOver: Boolean = false
 ) {
 
+    private var isGameOver: Boolean = false
     private var currentCycle = GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES
 
     init {
@@ -58,7 +58,7 @@ class GameMaster(
 
     private fun startNightOfGettingAcquaintances() {
         activity.hideAllActions()
-        activity.showNightOdGettingAcquaintancesAction()
+        activity.showNightOfGettingAcquaintancesAction()
     }
 
     private fun startTalk() {
@@ -67,7 +67,7 @@ class GameMaster(
     }
 
     private fun startSpeeches() {
-        
+
     }
 
     private fun startVoting() {

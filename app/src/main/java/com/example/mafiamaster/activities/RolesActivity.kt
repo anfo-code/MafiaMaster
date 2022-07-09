@@ -6,7 +6,6 @@ import android.view.View
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityRolesBinding
 import com.example.mafiamaster.model.Player
-import com.example.mafiamaster.model.RolesGive
 import com.example.mafiamaster.utils.BaseForActivities
 import com.example.mafiamaster.utils.Constants
 
@@ -69,7 +68,7 @@ class RolesActivity : BaseForActivities(), View.OnClickListener {
         if (currentPlayer == playersMap.size){
             isTheLastPlayerShown = true
         }
-        binding.playerNumberTextView.text = getString(R.string.player, currentPlayer)
+        binding.secondaryTextView.text = getString(R.string.player, currentPlayer)
     }
 
     private fun showRole() {

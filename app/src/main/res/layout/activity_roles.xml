@@ -14,7 +14,7 @@
         android:background="@drawable/rectangular_rounded_shape">
 
         <TextView
-            android:id="@+id/playerNumberTextView"
+            android:id="@+id/secondaryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_alternates_medium"
@@ -36,7 +36,7 @@
             android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/playerNumberTextView" />
+            app:layout_constraintTop_toTopOf="@id/secondaryTextView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
