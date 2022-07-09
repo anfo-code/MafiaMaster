@@ -73,7 +73,7 @@
                         android:layout_width="@dimen/smallerCircularIconForegroundSize"
                         android:layout_height="@dimen/smallerCircularIconForegroundSize"
                         android:contentDescription="@string/icon"
-                        android:foreground="@drawable/ic_commonfolk"
+                        android:foreground="@drawable/ic_civillian"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

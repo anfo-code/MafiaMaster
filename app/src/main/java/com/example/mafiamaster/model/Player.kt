@@ -1,6 +1,7 @@
 package com.example.mafiamaster.model
 
 import com.example.mafiamaster.utils.Constants
+import java.io.Serializable
 
 data class Player(
     var role: Int = Constants.CIVILIAN,
@@ -12,4 +13,4 @@ data class Player(
     var blocksStreak: Int = 0,
     var foulsCount: Int = 0,
     var isThirdFoulActionCompleted: Boolean = false,
-)
+) : Serializable

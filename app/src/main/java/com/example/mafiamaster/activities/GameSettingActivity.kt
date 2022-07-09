@@ -8,6 +8,7 @@ import com.example.mafiamaster.databinding.ActivityGameSettingBinding
 import com.example.mafiamaster.model.RolesCountHandler
 import com.example.mafiamaster.model.RolesGive
 import com.example.mafiamaster.utils.BaseForActivities
+import com.example.mafiamaster.utils.Constants
 
 class GameSettingActivity : BaseForActivities(), View.OnClickListener {
 
@@ -35,6 +36,7 @@ class GameSettingActivity : BaseForActivities(), View.OnClickListener {
         binding.ivRemoveDoctors.setOnClickListener(this)
         binding.ivRemoveManiacs.setOnClickListener(this)
         binding.ivRemoveSheriffs.setOnClickListener(this)
+        binding.buttonStartGame.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -101,7 +103,7 @@ class GameSettingActivity : BaseForActivities(), View.OnClickListener {
     private fun startTheGame() {
         val rolesGive = RolesGive(rolesCountHandler)
         val intent = Intent(this, RolesActivity::class.java)
-        intent.putExtra("RolesMap", rolesGive.getPlayersMap())
+        intent.putExtra(Constants.ROLES_MAP_EXTRA_KEY, rolesGive.getPlayersMap())
         startActivity(intent)
     }
 }

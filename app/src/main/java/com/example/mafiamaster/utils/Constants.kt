@@ -8,4 +8,5 @@ object Constants {
     const val DOCTOR = 4
     const val SHERIFF = 5
     const val CIVILIAN = 6
+    const val ROLES_MAP_EXTRA_KEY = "RolesMap"
 }

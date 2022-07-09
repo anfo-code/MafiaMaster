@@ -18,7 +18,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_alternates_medium"
-            android:text="Player 5"
             android:textColor="@color/circularIconBackgroundColor"
             android:textSize="@dimen/secondaryTextSize"
             android:layout_marginTop="60dp"
@@ -31,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_alternates_medium"
-            android:text="Role"
+            android:text="@string/your_role_is"
             android:textColor="@color/circularIconBackgroundColor"
             android:textSize="@dimen/mainTextSize"
             android:layout_marginTop="40dp"
@@ -56,13 +55,13 @@
                 android:layout_width="@dimen/circularIconForegroundSize"
                 android:layout_height="@dimen/circularIconForegroundSize"
                 android:contentDescription="@string/icon"
-                android:foreground="@drawable/ic_question_mark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:id="@+id/roleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"

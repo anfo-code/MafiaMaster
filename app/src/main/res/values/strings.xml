@@ -7,7 +7,7 @@
     <string name="show">Показати</string>
     <string name="day">День</string>
     <string name="night">Ніч</string>
-    <string name="player">Гравець</string>
+    <string name="player">Гравець %1$d</string>
     <string name="mafia_kills">Мафія вбиває</string>
     <string name="whore_pays_a_visit">Путана відвідує</string>
     <string name="doctor_heals">Доктор лікує</string>
@@ -48,4 +48,6 @@
     <string name="civilians_explanation">\t Пасивна роль, яка не прокидається вночі. Допомагає місту прибирати ма фію вдень на голосуванні.</string>
     <string name="players_roles">Ролі гравців</string>
     <string name="edit_fouls_of_players">Редагування фолів</string>
+    <string name="your_role_is">Ваша роль</string>
+    <string name="next_player">Наступний гравець</string>
 </resources>
