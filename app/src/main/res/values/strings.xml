@@ -17,7 +17,7 @@
     <string name="talk">Балаган</string>
     <string name="last_words">Останні слова</string>
     <string name="players_role_was">Роль цього гравця була</string>
-    <string name="speech_of_player">Промова гравця</string>
+    <string name="speech_of_player">Промова гравця %1$d</string>
     <string name="mafia">Мафія</string>
     <string name="don_mafia">Дон Мафії</string>
     <string name="mistress">Путана</string>

@@ -8,11 +8,14 @@ import com.example.mafiamaster.model.GameMaster
 import com.example.mafiamaster.model.Player
 import com.example.mafiamaster.utils.BaseForActivities
 import com.example.mafiamaster.utils.Constants
+import com.example.mafiamaster.utils.TimerHandler
 
 class GameActivity : BaseForActivities(), View.OnClickListener {
+
     private lateinit var binding: ActivityGameBinding
     private var playersMap: HashMap<Int, Player> = HashMap()
-    private val gameMaster: GameMaster = GameMaster(playersMap,this)
+    private lateinit var gameMaster: GameMaster
+    private lateinit var timerHandler: TimerHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityGameBinding.inflate(layoutInflater)
@@ -20,14 +23,28 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         setContentView(binding.root)
 
         getPlayersMapFromIntent()
+        gameMaster = GameMaster(playersMap,this)
+        timerHandler = TimerHandler(binding, gameMaster)
 
         binding.buttonFinishTheNightOfGettingAcquaintances.setOnClickListener(this)
+        binding.constraintLayoutPauseStart.setOnClickListener(this)
+        binding.constraintLayoutSkip.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.buttonFinishTheNightOfGettingAcquaintances -> {
-                gameMaster.goToTheNextPart()
+                gameMaster.goToThePartAfterGettingAcquaintances()
+            }
+            R.id.constraintLayoutPauseStart -> {
+                if (timerHandler.isTimerPaused()) {
+                    resumeTimer()
+                } else {
+                    pauseTimer()
+                }
+            }
+            R.id.constraintLayoutSkip -> {
+                timerHandler.skipTimer()
             }
         }
     }
@@ -41,8 +58,9 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
             intent.getSerializableExtra(Constants.ROLES_MAP_EXTRA_KEY) as HashMap<Int, Player>
     }
 
-    fun showTimer() {
+    private fun showTimer(time: Int) {
         binding.timerLayout.visibility = View.VISIBLE
+        timerHandler.setTimer(time)
     }
 
     fun showVotingAction() {
@@ -67,12 +85,24 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.dayNightTextView.text = getString(R.string.night)
     }
 
+    fun showTalkAction() {
+        showTimer(Constants.TALK_TIME)
+        setDayView()
+        binding.secondaryTextView.text = getString(R.string.talk)
+    }
+
+    fun showSpeechAction(playerNumber: Int) {
+        showTimer(Constants.SPEECH_TIME)
+        binding.secondaryTextView.text = getString(R.string.speech_of_player, playerNumber)
+    }
+
     fun hideAllActions() {
         binding.timerLayout.visibility = View.GONE
         binding.votingLayout.visibility = View.GONE
         binding.nightActionLayout.visibility = View.GONE
         binding.killedPlayersLayout.visibility = View.GONE
         binding.foulConstraintLayout.visibility = View.GONE
+        binding.nightOfGettingAcquaintancesLayout.visibility = View.GONE
     }
 
     private fun setMafiaGetsAcquaintancesView() {
@@ -103,5 +133,22 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     private fun setSheriffView() {
         binding.dayOrNightImageView.setImageResource(R.drawable.ic_sheriff)
         binding.secondaryTextView.text = getString(R.string.sheriff_checks)
+    }
+
+    private fun setDayView() {
+        binding.dayNightTextView.text = getString(R.string.day)
+        binding.dayOrNightImageView.setImageResource(R.drawable.ic_day)
+    }
+
+    private fun pauseTimer() {
+        timerHandler.pauseTimer()
+    }
+
+    private fun resumeTimer() {
+        timerHandler.resumeTimer()
+    }
+
+    private fun skipTimer() {
+        gameMaster.timerFinished()
     }
 }

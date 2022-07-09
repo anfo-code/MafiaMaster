@@ -9,4 +9,6 @@ object Constants {
     const val SHERIFF = 5
     const val CIVILIAN = 6
     const val ROLES_MAP_EXTRA_KEY = "RolesMap"
+    const val TALK_TIME = 150
+    const val SPEECH_TIME = 40
 }

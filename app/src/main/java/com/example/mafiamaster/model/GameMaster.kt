@@ -1,5 +1,6 @@
 package com.example.mafiamaster.model
 
+import android.widget.Toast
 import com.example.mafiamaster.activities.GameActivity
 import com.example.mafiamaster.utils.GameFlowConstants
 
@@ -9,34 +10,37 @@ class GameMaster(
 ) {
 
     private var isGameOver: Boolean = false
-    private var currentCycle = GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES
+    private var currentPart = GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES
+    private var isSomebodyKilled = false
+    private var playerSpeaking = 1
+
 
     init {
         startCurrentPart()
     }
 
     private fun startCurrentPart() {
-        when (currentCycle) {
+        when (currentPart) {
             GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES -> {
                 startNightOfGettingAcquaintances()
             }
             GameFlowConstants.NIGHT -> {
-                startNightOfGettingAcquaintances()
+                startNight()
             }
             GameFlowConstants.LAST_WORDS_AFTER_NIGHT -> {
-                startNightOfGettingAcquaintances()
+                startLastWords()
             }
             GameFlowConstants.TALK -> {
-                startNightOfGettingAcquaintances()
+                startTalk()
             }
             GameFlowConstants.SPEECHES -> {
-                startNightOfGettingAcquaintances()
+                startSpeeches()
             }
             GameFlowConstants.VOTING -> {
-                startNightOfGettingAcquaintances()
+                startVoting()
             }
             GameFlowConstants.LAST_WORDS_AFTER_VOTING -> {
-                startNightOfGettingAcquaintances()
+                startLastWords()
             }
 
         }
@@ -46,13 +50,13 @@ class GameMaster(
         if (isGameOver) {
             finishTheGame()
         } else {
-            currentCycle++
+            currentPart++
             startCurrentPart()
         }
     }
 
     fun goToThePartAfterGettingAcquaintances() {
-        currentCycle = GameFlowConstants.TALK
+        currentPart = GameFlowConstants.TALK
         startCurrentPart()
     }
 
@@ -63,11 +67,16 @@ class GameMaster(
 
     private fun startTalk() {
         activity.hideAllActions()
-        activity.showTimer()
+        activity.showTalkAction()
     }
 
     private fun startSpeeches() {
+        if (playerSpeaking == getAlivePlayersAmount()) {
 
+        } else {
+            activity.showSpeechAction(playerSpeaking)
+            playerSpeaking++
+        }
     }
 
     private fun startVoting() {
@@ -76,9 +85,12 @@ class GameMaster(
     }
 
     private fun startLastWords() {
-        activity.hideAllActions()
-        activity.showTimer()
-        activity.showKilledPlayersRoleAction()
+        if (isSomebodyKilled) {
+            activity.hideAllActions()
+            activity.showKilledPlayersRoleAction()
+        } else {
+
+        }
     }
 
     private fun startNight() {
@@ -88,6 +100,27 @@ class GameMaster(
 
     private fun finishTheGame() {
 
+    }
+
+    fun timerFinished() {
+        when (currentPart) {
+            GameFlowConstants.TALK -> {
+                goToTheNextPart()
+            }
+            GameFlowConstants.SPEECHES -> {
+
+            }
+        }
+    }
+
+    private fun getAlivePlayersAmount(): Int {
+        var alivePlayersAmount = 0
+        for (player in 1..playersMap.size) {
+            if (playersMap[player]!!.alive) {
+                alivePlayersAmount++
+            }
+        }
+        return alivePlayersAmount
     }
 
 }
