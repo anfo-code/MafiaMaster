@@ -1,40 +1,64 @@
 package com.example.mafiamaster.model
 
 import com.example.mafiamaster.activities.GameActivity
+import com.example.mafiamaster.utils.GameFlowConstants
 
 class GameMaster(
     private val playersMap: HashMap<Int, Player>,
-    private val activity: GameActivity
+    private val activity: GameActivity,
     private var isGameOver: Boolean = false
 ) {
+
+    private var currentCycle = GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES
+
     init {
-        firstCycle()
+        startCurrentPart()
     }
 
-    private fun firstCycle() {
-        startNightOfGettingAcquaintances()
-        startTalk()
-        startSpeeches()
-        startVoting()
-        startLastWords()
+    private fun startCurrentPart() {
+        when (currentCycle) {
+            GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES -> {
+                startNightOfGettingAcquaintances()
+            }
+            GameFlowConstants.NIGHT -> {
+                startNightOfGettingAcquaintances()
+            }
+            GameFlowConstants.LAST_WORDS_AFTER_NIGHT -> {
+                startNightOfGettingAcquaintances()
+            }
+            GameFlowConstants.TALK -> {
+                startNightOfGettingAcquaintances()
+            }
+            GameFlowConstants.SPEECHES -> {
+                startNightOfGettingAcquaintances()
+            }
+            GameFlowConstants.VOTING -> {
+                startNightOfGettingAcquaintances()
+            }
+            GameFlowConstants.LAST_WORDS_AFTER_VOTING -> {
+                startNightOfGettingAcquaintances()
+            }
+
+        }
     }
 
-    private fun generalCycle() {
-        startNight()
-        startLastWords()
-        startTalk()
-        startSpeeches()
-        startVoting()
-        startLastWords()
+    fun goToTheNextPart() {
         if (isGameOver) {
             finishTheGame()
         } else {
-            generalCycle()
+            currentCycle++
+            startCurrentPart()
         }
+    }
+
+    fun goToThePartAfterGettingAcquaintances() {
+        currentCycle = GameFlowConstants.TALK
+        startCurrentPart()
     }
 
     private fun startNightOfGettingAcquaintances() {
         activity.hideAllActions()
+        activity.showNightOdGettingAcquaintancesAction()
     }
 
     private fun startTalk() {
@@ -43,7 +67,7 @@ class GameMaster(
     }
 
     private fun startSpeeches() {
-
+        
     }
 
     private fun startVoting() {
@@ -63,7 +87,7 @@ class GameMaster(
     }
 
     private fun finishTheGame() {
-        
+
     }
 
 }

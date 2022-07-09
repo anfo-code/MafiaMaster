@@ -5,7 +5,7 @@
     <dimen name="secondaryTextSize">22sp</dimen>
     <dimen name="timerProgressBarSize">190dp</dimen>
     <dimen name="timerCircularBackgroundSize">150dp</dimen>
-    <dimen name="timerTextSize">52dp</dimen>
+    <dimen name="timerTextSize">52sp</dimen>
     <dimen name="timerButtonIconSize">30dp</dimen>
     <dimen name="circularIconForegroundSize">90dp</dimen>
     <dimen name="smallerCircularIconForegroundSize">60dp</dimen>

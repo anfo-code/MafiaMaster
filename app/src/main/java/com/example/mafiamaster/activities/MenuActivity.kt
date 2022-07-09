@@ -37,6 +37,10 @@ class MenuActivity : BaseForActivities(), View.OnClickListener {
         }
     }
 
+    override fun onBackPressed() {
+        doubleBackToExit()
+    }
+
     private fun startGame() {
         startActivity(Intent(this, GameSettingActivity::class.java))
     }

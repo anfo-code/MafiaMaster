@@ -50,6 +50,10 @@ class RolesActivity : BaseForActivities(), View.OnClickListener {
         }
     }
 
+    override fun onBackPressed() {
+        doubleBackToExit()
+    }
+
     private fun getPlayersMapFromIntent() {
         playersMap = intent.getSerializableExtra(Constants.ROLES_MAP_EXTRA_KEY) as HashMap<Int, Player>
     }

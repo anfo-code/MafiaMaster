@@ -12,14 +12,16 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding = ActivityGameBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
 
         }
+    }
+
+    override fun onBackPressed() {
+        doubleBackToExit()
     }
 
     fun showTimer() {
@@ -40,6 +42,10 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     fun showThreeFoulAction() {
         binding.foulConstraintLayout.visibility = View.VISIBLE
+    }
+
+    fun showNightOdGettingAcquaintancesAction() {
+        binding.nightOfGettingAcquaintancesLayout.visibility = View.VISIBLE
     }
 
     fun hideAllActions() {

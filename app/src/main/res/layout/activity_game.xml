@@ -198,7 +198,7 @@
             android:layout_marginHorizontal="36dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingHorizontal="2dp"
+        android:paddingVertical="2dp"
             android:text="@string/confirm"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
@@ -235,7 +235,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/nightActionsRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
         </ScrollView>
 
@@ -247,7 +247,7 @@
             android:layout_marginHorizontal="36dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingHorizontal="2dp"
+            android:paddingVertical="2dp"
             android:text="@string/confirm"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
@@ -285,7 +285,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/votingRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
         </ScrollView>
 
@@ -326,7 +326,7 @@
             android:layout_marginHorizontal="36dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingHorizontal="2dp"
+            android:paddingVertical="2dp"
             android:text="@string/get_extra_vote"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
@@ -343,7 +343,7 @@
             android:layout_marginHorizontal="36dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingHorizontal="2dp"
+            android:paddingVertical="2dp"
             android:text="@string/skip_speech"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
@@ -351,6 +351,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/getExtraVoteButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nightOfGettingAcquaintancesLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerNumberTextView">
+
+        <Button
+            android:id="@+id/buttonFinishTheNightOfGettingAcquaintances"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:background="@drawable/rectangular_rounded_shape"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingVertical="2dp"
+            android:text="@string/end_the_night_of_getting_acquaintances"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="@dimen/buttonTextSize"
+            android:layout_marginBottom="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

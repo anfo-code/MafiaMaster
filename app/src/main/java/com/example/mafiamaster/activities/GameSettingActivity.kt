@@ -78,6 +78,10 @@ class GameSettingActivity : BaseForActivities(), View.OnClickListener {
         showCurrentRolesCount()
     }
 
+    override fun onBackPressed() {
+        doubleBackToExit()
+    }
+
     private fun setToolbar() {
         setSupportActionBar(binding.toolbarMain)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
