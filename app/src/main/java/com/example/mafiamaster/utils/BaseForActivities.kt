@@ -6,6 +6,7 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.mafiamaster.R
 
 open class BaseForActivities: AppCompatActivity() {
 
@@ -38,4 +39,16 @@ open class BaseForActivities: AppCompatActivity() {
         }
     }
 
+    fun getRoleNameFromCode(roleCode: Int): String {
+        return when(roleCode) {
+            Constants.CIVILIAN -> getString(R.string.civilian)
+            Constants.MAFIA -> getString(R.string.mafia)
+            Constants.MISTRESS -> getString(R.string.mistress)
+            Constants.DON -> getString(R.string.don)
+            Constants.DOCTOR -> getString(R.string.doctor)
+            Constants.MANIAC -> getString(R.string.maniac)
+            Constants.SHERIFF -> getString(R.string.sheriff)
+            else -> ""
+        }
+    }
 }

@@ -13,6 +13,7 @@ class GameMaster(
     private var isSomebodyKilled = false
     private var playerSpeakingCount = 1
     private var playerSpeaking = 1
+    private var killedPlayersList: ArrayList<Int> = ArrayList()
 
 
     init {
@@ -46,12 +47,17 @@ class GameMaster(
         }
     }
 
-    fun goToTheNextPart() {
+    private fun goToTheNextPart() {
         if (isGameOver) {
             finishTheGame()
         } else {
-            currentPart++
-            startCurrentPart()
+            if (currentPart == GameFlowConstants.LAST_WORDS_AFTER_VOTING){
+                currentPart = GameFlowConstants.NIGHT
+                startCurrentPart()
+            } else {
+                currentPart++
+                startCurrentPart()
+            }
         }
     }
 
@@ -181,5 +187,43 @@ class GameMaster(
             }
         }
         return alivePlayersNumberArrayList
+    }
+
+    fun executePlayerWithMostVotes() {
+        val playerToBeExecuted = getPlayerWithMostVotes()
+        clearTheVotes()
+        killThePlayer(playerToBeExecuted)
+        goToTheNextPart()
+    }
+
+    private fun getPlayerWithMostVotes(): Int {
+        val alivePlayersList = getAlivePlayersNumbersArrayList()
+        val alivePlayersMap = getAlivePlayersMap()
+        //Start comparing from the first alive player
+        var numberOfPlayerWithMostVotes = alivePlayersList[0]
+        for (player in 1..alivePlayersList.size - 1) {
+            if (alivePlayersMap[numberOfPlayerWithMostVotes]!!.votesAmount
+                < alivePlayersMap[alivePlayersList[player]]!!.votesAmount
+            ) {
+                numberOfPlayerWithMostVotes = alivePlayersList[player]
+            }
+        }
+        return numberOfPlayerWithMostVotes
+    }
+
+    private fun clearTheVotes() {
+        for (player in 1..playersMap.size) {
+            playersMap[player]!!.votesAmount = 0
+        }
+    }
+
+    private fun killThePlayer(playerNumber: Int) {
+        playersMap[playerNumber]!!.alive = false
+        killedPlayersList.add(playerNumber)
+        isSomebodyKilled = true
+    }
+
+    fun getKilledPlayersList(): ArrayList<Int> {
+        return killedPlayersList
     }
 }

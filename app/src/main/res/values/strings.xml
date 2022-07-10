@@ -25,6 +25,10 @@
     <string name="civilian">Мирний житель</string>
     <string name="sheriff">Комісар</string>
     <string name="maniac">Маньяк</string>
+    <string name="today_victims_are">Сьогоднішні жертви</string>
+    <string name="player_and_player">Гравець %1$d та гравець %2$d</string>
+    <string name="role_and_role">%1$s та %2$s</string>
+    <string name="everybody_is_alive">Всі живі!</string>
     <string name="start_the_night">Розпочати ніч</string>
     <string name="confirm">Підтвердити</string>
     <string name="get_extra_vote">Отримати додатковий голос</string>
@@ -53,4 +57,5 @@
     <string name="end_voting">Закінчити голосування</string>
     <string name="end_the_night_of_getting_acquaintances">Закінчити ніч знайомств</string>
     <string name="black_players_get_acquaintances">Чорні гравці знайомляться</string>
+    <string name="start_the_night">Розпочати ніч</string>
 </resources>

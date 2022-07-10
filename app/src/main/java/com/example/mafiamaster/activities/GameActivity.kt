@@ -1,7 +1,6 @@
 package com.example.mafiamaster.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mafiamaster.R
@@ -26,13 +25,14 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         setContentView(binding.root)
 
         getPlayersMapFromIntent()
-        gameMaster = GameMaster(playersMap,this)
+        gameMaster = GameMaster(playersMap, this)
         timerHandler = TimerHandler(binding, gameMaster, this)
 
 
         binding.buttonFinishTheNightOfGettingAcquaintances.setOnClickListener(this)
         binding.constraintLayoutPauseStart.setOnClickListener(this)
         binding.constraintLayoutSkip.setOnClickListener(this)
+        binding.buttonFinishVoting.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -49,6 +49,9 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
             }
             R.id.constraintLayoutSkip -> {
                 timerHandler.skipTimer()
+            }
+            R.id.buttonFinishVoting -> {
+                gameMaster.executePlayerWithMostVotes()
             }
         }
     }
@@ -69,6 +72,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     fun showVotingAction() {
         binding.votingLayout.visibility = View.VISIBLE
+        binding.secondaryTextView.text = getString(R.string.voting)
         setupVotingList()
     }
 
@@ -78,6 +82,16 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     fun showKilledPlayersRoleAction() {
         binding.killedPlayersLayout.visibility = View.VISIBLE
+        binding.dayNightTextView.text = getString(R.string.today_victims_are)
+        changeSecondaryTextViewTextAccordingToVictimsAmount()
+        val killedPlayersList = gameMaster.getKilledPlayersList()
+
+        if (killedPlayersList.size == 0) {
+            binding.killedPlayersRoleTextView.visibility = View.GONE
+        } else {
+            binding.killedPlayersRoleTextView.visibility = View.VISIBLE
+            setKilledPlayersRoleTextView(killedPlayersList)
+        }
     }
 
     fun showThreeFoulAction() {
@@ -98,7 +112,8 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     fun startCurrentPlayerSpeech() {
         startSpeechTimer()
-        binding.secondaryTextView.text = getString(R.string.speech_of_player, gameMaster.getCurrentPlayerSpeaking())
+        binding.secondaryTextView.text =
+            getString(R.string.speech_of_player, gameMaster.getCurrentPlayerSpeaking())
     }
 
     fun hideAllActions() {
@@ -164,5 +179,38 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.votingRecyclerView.layoutManager = LinearLayoutManager(this)
         val votingItemAdapter = VotingItemAdapter(this, gameMaster)
         binding.votingRecyclerView.adapter = votingItemAdapter
+    }
+
+    private fun changeSecondaryTextViewTextAccordingToVictimsAmount() {
+        val killedPlayersList = gameMaster.getKilledPlayersList()
+        when (killedPlayersList.size) {
+            0 -> {
+                binding.secondaryTextView.text = getString(R.string.everybody_is_alive)
+            }
+            1 -> {
+                binding.secondaryTextView.text = getString(R.string.player, killedPlayersList[0])
+            }
+            2 -> {
+                binding.secondaryTextView.text = getString(
+                    R.string.player_and_player,
+                    killedPlayersList[0],
+                    killedPlayersList[1]
+                )
+            }
+        }
+    }
+
+    private fun setKilledPlayersRoleTextView(killedPlayerList: ArrayList<Int>) {
+        if (killedPlayerList.size == 1) {
+            binding.killedPlayersRoleTextView.text = getRoleNameFromCode(
+                playersMap[killedPlayerList[0]]!!.role
+            )
+        } else {
+            binding.killedPlayersRoleTextView.text = getString(
+                R.string.role_and_role,
+                getRoleNameFromCode(playersMap[killedPlayerList[0]]!!.role),
+                getRoleNameFromCode(playersMap[killedPlayerList[1]]!!.role)
+                )
+        }
     }
 }

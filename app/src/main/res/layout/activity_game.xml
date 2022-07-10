@@ -4,29 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.GameActivity"
     android:background="@color/backgroundColor"
-    >
+    tools:context=".activities.GameActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarMain"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/toolbarBackgroundColor"
-            android:theme="@style/CustomToolBarStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBackgroundColor"
+        android:theme="@style/CustomToolBarStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dayNightTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/montserrat_alternates_medium"
         android:text="@string/night"
         android:textColor="@color/circularIconBackgroundColor"
         android:textSize="42sp"
-        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarMain" />
@@ -35,9 +34,9 @@
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@drawable/circle_for_icons"
         android:padding="10dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dayNightTextView">
@@ -57,11 +56,11 @@
         android:id="@+id/secondaryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/montserrat_alternates_medium"
         android:text="@string/black_players_get_acquaintances"
         android:textColor="@color/circularIconBackgroundColor"
         android:textSize="@dimen/secondaryTextSize"
-        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -181,30 +180,30 @@
         app:layout_constraintTop_toBottomOf="@+id/secondaryTextView">
 
 
-    <TextView
-        android:id="@+id/killedPlayersRoleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_alternates_medium"
-        android:text="@string/maniac"
-        android:textColor="@color/circularIconBackgroundColor"
-        android:textSize="42sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/killedPlayersRoleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:text="@string/maniac"
+            android:textColor="@color/circularIconBackgroundColor"
+            android:textSize="42sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+        <Button
             android:id="@+id/killedPlayerRoleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
+            android:layout_marginBottom="60dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
-        android:paddingVertical="2dp"
-            android:text="@string/confirm"
+            android:paddingVertical="2dp"
+            android:text="@string/start_the_night"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
-            android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -247,13 +246,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
+            android:layout_marginBottom="60dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
             android:paddingVertical="2dp"
             android:text="@string/confirm"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
-            android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -276,9 +275,9 @@
             android:id="@+id/votingScrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/rectangular_rounded_shape"
-            app:layout_constraintBottom_toTopOf="@+id/buttonVoting"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/rectangular_rounded_shape"
+            app:layout_constraintBottom_toTopOf="@+id/buttonFinishVoting"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -293,17 +292,17 @@
 
 
         <Button
-            android:id="@+id/buttonVoting"
+            android:id="@+id/buttonFinishVoting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
+            android:layout_marginBottom="60dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
             android:paddingVertical="2dp"
             android:text="@string/end_voting"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
-            android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -326,17 +325,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
+            android:layout_marginBottom="120dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
             android:paddingVertical="2dp"
             android:text="@string/get_extra_vote"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
-            android:layout_marginBottom="120dp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/skipSpeechButton"
@@ -371,13 +370,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
+            android:layout_marginBottom="60dp"
             android:background="@drawable/rectangular_rounded_shape"
             android:foreground="?attr/selectableItemBackground"
             android:paddingVertical="2dp"
             android:text="@string/end_the_night_of_getting_acquaintances"
             android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/buttonTextSize"
-            android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -385,4 +384,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
