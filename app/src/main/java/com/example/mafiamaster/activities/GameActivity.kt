@@ -1,11 +1,14 @@
 package com.example.mafiamaster.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityGameBinding
 import com.example.mafiamaster.model.GameMaster
 import com.example.mafiamaster.model.Player
+import com.example.mafiamaster.recyclerviewadapters.VotingItemAdapter
 import com.example.mafiamaster.utils.BaseForActivities
 import com.example.mafiamaster.utils.Constants
 import com.example.mafiamaster.utils.TimerHandler
@@ -25,6 +28,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         getPlayersMapFromIntent()
         gameMaster = GameMaster(playersMap,this)
         timerHandler = TimerHandler(binding, gameMaster, this)
+
 
         binding.buttonFinishTheNightOfGettingAcquaintances.setOnClickListener(this)
         binding.constraintLayoutPauseStart.setOnClickListener(this)
@@ -65,6 +69,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     fun showVotingAction() {
         binding.votingLayout.visibility = View.VISIBLE
+        setupVotingList()
     }
 
     fun showNightAction() {
@@ -91,9 +96,9 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.secondaryTextView.text = getString(R.string.talk)
     }
 
-    fun showSpeechAction(playerNumber: Int) {
-        showTimer(Constants.SPEECH_TIME)
-        binding.secondaryTextView.text = getString(R.string.speech_of_player, playerNumber)
+    fun startCurrentPlayerSpeech() {
+        startSpeechTimer()
+        binding.secondaryTextView.text = getString(R.string.speech_of_player, gameMaster.getCurrentPlayerSpeaking())
     }
 
     fun hideAllActions() {
@@ -142,13 +147,22 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     private fun pauseTimer() {
         timerHandler.pauseTimer()
+        binding.pauseStartImageView.setImageResource(R.drawable.ic_play)
     }
 
     private fun resumeTimer() {
         timerHandler.resumeTimer()
+        binding.pauseStartImageView.setImageResource(R.drawable.ic_pause)
     }
 
-    private fun skipTimer() {
-        gameMaster.timerFinished()
+    private fun startSpeechTimer() {
+        showTimer(Constants.SPEECH_TIME)
+        pauseTimer()
+    }
+
+    private fun setupVotingList() {
+        binding.votingRecyclerView.layoutManager = LinearLayoutManager(this)
+        val votingItemAdapter = VotingItemAdapter(this, gameMaster)
+        binding.votingRecyclerView.adapter = votingItemAdapter
     }
 }

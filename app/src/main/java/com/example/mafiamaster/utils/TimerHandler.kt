@@ -35,8 +35,8 @@ class TimerHandler(
             override fun onFinish() {
                 currentTimerTimeProgress = 0
                 currentTimerTime = 0
-                gameMaster.timerFinished()
                 MediaPlayer.create(context, R.raw.timer_finish_sound).start()
+                gameMaster.timerFinished()
             }
         }.start()
     }

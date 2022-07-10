@@ -88,7 +88,7 @@
                     android:fontFamily="@font/montserrat_alternates_medium"
                     android:text="@string/players"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="@dimen/secondaryTextSize"
+                    android:textSize="@dimen/textForRolesInGameSettingActivity"
                     app:layout_constraintStart_toEndOf="@+id/clCiviliansIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -170,7 +170,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/mafiaTextView"
+                    android:id="@+id/textForRolesInGameSettingActivity"
                     android:layout_width="@dimen/roleNamesLengthInPixelsInGameSettingActivity"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/textFromIconDistanceInGameSettingActivity"
@@ -178,7 +178,7 @@
                     android:fontFamily="@font/montserrat_alternates_medium"
                     android:text="@string/mafia"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="@dimen/secondaryTextSize"
+                    android:textSize="@dimen/textForRolesInGameSettingActivity"
                     app:layout_constraintStart_toEndOf="@+id/clMafiaIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -250,7 +250,7 @@
                     android:fontFamily="@font/montserrat_alternates_medium"
                     android:text="@string/don"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="@dimen/secondaryTextSize"
+                    android:textSize="@dimen/textForRolesInGameSettingActivity"
                     app:layout_constraintStart_toEndOf="@+id/clDonIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -321,7 +321,7 @@
                     android:fontFamily="@font/montserrat_alternates_medium"
                     android:text="@string/mistress"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="@dimen/secondaryTextSize"
+                    android:textSize="@dimen/textForRolesInGameSettingActivity"
                     app:layout_constraintStart_toEndOf="@+id/clMistressIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -411,7 +411,7 @@
                     android:fontFamily="@font/montserrat_alternates_medium"
                     android:text="@string/sheriff"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="@dimen/secondaryTextSize"
+                    android:textSize="@dimen/textForRolesInGameSettingActivity"
                     app:layout_constraintStart_toEndOf="@+id/clSheriffIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -501,7 +501,7 @@
                     android:fontFamily="@font/montserrat_alternates_medium"
                     android:text="@string/doctor"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="@dimen/secondaryTextSize"
+                    android:textSize="@dimen/textForRolesInGameSettingActivity"
                     app:layout_constraintStart_toEndOf="@+id/clDoctorIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -591,7 +591,7 @@
                     android:fontFamily="@font/montserrat_alternates_medium"
                     android:text="@string/maniac"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="@dimen/secondaryTextSize"
+                    android:textSize="@dimen/textForRolesInGameSettingActivity"
                     app:layout_constraintStart_toEndOf="@+id/clManiacIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 

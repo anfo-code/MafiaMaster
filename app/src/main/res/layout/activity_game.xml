@@ -71,7 +71,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="25dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,10 +157,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/pauseStartImageView"
                 android:layout_width="@dimen/timerButtonIconSize"
                 android:layout_height="@dimen/timerButtonIconSize"
                 android:contentDescription="@string/icon"
-                android:foreground="@drawable/ic_pause"
+                android:src="@drawable/ic_pause"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -265,7 +266,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="30dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -285,7 +286,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/votingRecyclerView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </ScrollView>

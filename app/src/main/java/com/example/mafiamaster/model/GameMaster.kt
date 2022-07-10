@@ -1,6 +1,5 @@
 package com.example.mafiamaster.model
 
-import android.widget.Toast
 import com.example.mafiamaster.activities.GameActivity
 import com.example.mafiamaster.utils.GameFlowConstants
 
@@ -12,6 +11,7 @@ class GameMaster(
     private var isGameOver: Boolean = false
     private var currentPart = GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES
     private var isSomebodyKilled = false
+    private var playerSpeakingCount = 1
     private var playerSpeaking = 1
 
 
@@ -71,12 +71,7 @@ class GameMaster(
     }
 
     private fun startSpeeches() {
-        if (playerSpeaking == getAlivePlayersAmount()) {
-
-        } else {
-            activity.showSpeechAction(playerSpeaking)
-            playerSpeaking++
-        }
+        activity.startCurrentPlayerSpeech()
     }
 
     private fun startVoting() {
@@ -108,7 +103,11 @@ class GameMaster(
                 goToTheNextPart()
             }
             GameFlowConstants.SPEECHES -> {
-
+                if (playerSpeakingCount == getAlivePlayersAmount()) {
+                    goToTheNextPart()
+                } else {
+                    nextPlayerSpeech()
+                }
             }
         }
     }
@@ -123,4 +122,64 @@ class GameMaster(
         return alivePlayersAmount
     }
 
+    private fun nextPlayerSpeech() {
+        playerSpeakingCount++
+        playerSpeaking = getPlayerByCount()
+        activity.startCurrentPlayerSpeech()
+    }
+
+    //this function gets an alive player by playerSpeaking count
+    //if current playerSpeaker is 3, it gets third alive player in the list
+    private fun getPlayerByCount(): Int {
+        var playerFromCount = 0
+        var cycle = 1
+        var checkedPlayer = 1
+        while (cycle !== playerSpeakingCount) {
+            if (playersMap[checkedPlayer]!!.alive) {
+                cycle++
+                checkedPlayer++
+            } else {
+                checkedPlayer++
+            }
+        }
+        playerFromCount = checkedPlayer
+
+        return playerFromCount
+    }
+
+    fun getCurrentPlayerSpeaking(): Int {
+        return playerSpeaking
+    }
+
+    fun addVoteToPlayer(player: Int) {
+        playersMap[player]!!.votesAmount++
+    }
+
+    fun removeVoteFromPlayer(player: Int) {
+        playersMap[player]!!.votesAmount--
+    }
+
+    fun getCurrentPlayersMap(): HashMap<Int, Player> {
+        return playersMap
+    }
+
+    fun getAlivePlayersMap(): HashMap<Int, Player> {
+        var alivePlayersMap: HashMap<Int, Player> = HashMap()
+        for (player in 1..playersMap.size) {
+            if (playersMap[player]!!.alive) {
+                alivePlayersMap[player] = playersMap[player]!!
+            }
+        }
+        return alivePlayersMap
+    }
+
+    fun getAlivePlayersNumbersArrayList(): ArrayList<Int> {
+        var alivePlayersNumberArrayList: ArrayList<Int> = ArrayList()
+        for (player in 1..playersMap.size) {
+            if (playersMap[player]!!.alive) {
+                alivePlayersNumberArrayList.add(player)
+            }
+        }
+        return alivePlayersNumberArrayList
+    }
 }

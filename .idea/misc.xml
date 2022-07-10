@@ -23,7 +23,7 @@
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_skip.xml" value="0.2085" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_whore.xml" value="0.1535" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_fouls.xml" value="0.1" />
-        <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_game.xml" value="0.2" />
+        <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_game.xml" value="0.25" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_game_setting.xml" value="0.2" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_main.xml" value="0.21927083333333333" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_menu.xml" value="0.2" />
@@ -31,6 +31,9 @@
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_roles.xml" value="0.21927083333333333" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_rules.xml" value="0.136" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_settings.xml" value="0.21927083333333333" />
+        <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/row_night_action_item.xml" value="0.19791666666666666" />
+        <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/row_voting.xml" value="0.19791666666666666" />
+        <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/row_voting_item.xml" value="0.19791666666666666" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.11" />
       </map>
