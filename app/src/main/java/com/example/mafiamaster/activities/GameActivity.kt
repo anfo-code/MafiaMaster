@@ -33,6 +33,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.constraintLayoutPauseStart.setOnClickListener(this)
         binding.constraintLayoutSkip.setOnClickListener(this)
         binding.buttonFinishVoting.setOnClickListener(this)
+        binding.killedPlayerRoleButton.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -52,6 +53,9 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
             }
             R.id.buttonFinishVoting -> {
                 gameMaster.executePlayerWithMostVotes()
+            }
+            R.id.killedPlayerRoleButton -> {
+                gameMaster.goToTheNextPart()
             }
         }
     }
@@ -78,6 +82,10 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     fun showNightAction() {
         binding.nightActionLayout.visibility = View.VISIBLE
+    }
+
+    fun showMafiaAction() {
+
     }
 
     fun showKilledPlayersRoleAction() {

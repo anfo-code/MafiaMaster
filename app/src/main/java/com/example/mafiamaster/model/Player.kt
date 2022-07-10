@@ -9,6 +9,7 @@ data class Player(
     var isToBeDead: Boolean = false,
     var isToBeBlocked: Boolean = false,
     var isToBeHealed: Boolean = false,
+    var isChecked: Boolean = false,
     var wasHealedByDoctorTheLastNight: Boolean = false,
     var blocksStreak: Int = 0,
     var foulsCount: Int = 0,

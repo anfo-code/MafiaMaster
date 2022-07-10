@@ -1,5 +1,6 @@
 package com.example.mafiamaster.model
 
+import android.location.GnssAntennaInfo
 import com.example.mafiamaster.activities.GameActivity
 import com.example.mafiamaster.utils.GameFlowConstants
 
@@ -28,6 +29,21 @@ class GameMaster(
             GameFlowConstants.NIGHT -> {
                 startNight()
             }
+            GameFlowConstants.MAFIA_KILLS -> {
+                startMafiaAction()
+            }
+            GameFlowConstants.MISTRESS_PAYS_A_VISIT -> {
+
+            }
+            GameFlowConstants.DOCTOR_HEALS -> {
+
+            }
+            GameFlowConstants.MANIAC_KILLS -> {
+
+            }
+            GameFlowConstants.SHERIFF_CHECKS -> {
+
+            }
             GameFlowConstants.LAST_WORDS_AFTER_NIGHT -> {
                 startLastWords()
             }
@@ -47,11 +63,11 @@ class GameMaster(
         }
     }
 
-    private fun goToTheNextPart() {
+    fun goToTheNextPart() {
         if (isGameOver) {
             finishTheGame()
         } else {
-            if (currentPart == GameFlowConstants.LAST_WORDS_AFTER_VOTING){
+            if (currentPart == GameFlowConstants.LAST_WORDS_AFTER_VOTING) {
                 currentPart = GameFlowConstants.NIGHT
                 startCurrentPart()
             } else {
@@ -97,6 +113,11 @@ class GameMaster(
     private fun startNight() {
         activity.hideAllActions()
         activity.showNightAction()
+        goToTheNextPart()
+    }
+
+    private fun startMafiaAction() {
+        activity.showMafiaAction()
     }
 
     private fun finishTheGame() {
@@ -162,7 +183,9 @@ class GameMaster(
     }
 
     fun removeVoteFromPlayer(player: Int) {
-        playersMap[player]!!.votesAmount--
+        if (playersMap[player]!!.votesAmount > 0) {
+            playersMap[player]!!.votesAmount--
+        }
     }
 
     fun getCurrentPlayersMap(): HashMap<Int, Player> {
@@ -225,5 +248,46 @@ class GameMaster(
 
     fun getKilledPlayersList(): ArrayList<Int> {
         return killedPlayersList
+    }
+
+    fun chooseThePlayer(playerNumber: Int) {
+        when(currentPart) {
+            GameFlowConstants.MAFIA_KILLS -> {
+                playersMap[playerNumber]!!.isToBeDead = true
+            }
+            GameFlowConstants.MISTRESS_PAYS_A_VISIT -> {
+                playersMap[playerNumber]!!.isToBeBlocked = true
+                playersMap[playerNumber]!!.blocksStreak++
+                removeBlockStreaks(playerNumber)
+            }
+            GameFlowConstants.DOCTOR_HEALS -> {
+                playersMap[playerNumber]!!.isToBeHealed = true
+                playersMap[playerNumber]!!.wasHealedByDoctorTheLastNight = true
+                removeHealStreaks(playerNumber)
+            }
+            GameFlowConstants.MANIAC_KILLS -> {
+                playersMap[playerNumber]!!.isToBeDead = true
+            }
+            GameFlowConstants.SHERIFF_CHECKS -> {
+                playersMap[playerNumber]!!.isChecked = true
+            }
+        }
+        goToTheNextPart()
+    }
+
+    private fun removeHealStreaks(playerToBeLeft: Int) {
+        for (player in 1..playersMap.size) {
+            if (player != playerToBeLeft) {
+                playersMap[player]!!.wasHealedByDoctorTheLastNight = false
+            }
+        }
+    }
+
+    private fun removeBlockStreaks(playerToBeLeft: Int) {
+        for (player in 1..playersMap.size) {
+            if (player != playerToBeLeft) {
+                playersMap[player]!!.blocksStreak = 0
+            }
+        }
     }
 }
