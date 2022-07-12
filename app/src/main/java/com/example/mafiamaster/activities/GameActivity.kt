@@ -244,6 +244,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     private fun setupNightActionList(currentRole: Int) {
+        binding.buttonForSkippingActivePlayer.visibility = View.GONE
         binding.nightActionLayout.visibility = View.VISIBLE
         binding.nightActionsRecyclerView.layoutManager = LinearLayoutManager(this)
         val nightActionItemAdapter = NightActionItemAdapter(this, gameMaster, currentRole)

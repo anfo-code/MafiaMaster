@@ -48,6 +48,7 @@ class GameMaster(
                 startSheriffAction()
             }
             GameFlowConstants.LAST_WORDS_AFTER_NIGHT -> {
+                sumUpNightResult()
                 startLastWords()
             }
             GameFlowConstants.TALK -> {
@@ -120,6 +121,16 @@ class GameMaster(
         activity.showVotingAction()
     }
 
+    private fun sumUpNightResult() {
+        for (player in 1 until playersMap.size) {
+            val playerData = playersMap[player]
+            if (playerData!!.isToBeDead && !playerData.isToBeHealed && playerData.alive) {
+                playerData.alive = false
+                killedPlayersList.add(getAlivePlayersNumbersArrayList()[player])
+            }
+        }
+    }
+
     private fun startLastWords() {
         if (isSomebodyKilled) {
             activity.hideAllActions()
@@ -154,7 +165,6 @@ class GameMaster(
 
     private fun startSheriffAction() {
         activity.showSheriffAction()
-        applyTheNightResults()
     }
 
     private fun finishTheGame() {
@@ -399,15 +409,5 @@ class GameMaster(
 
     fun checkIfPlayerIsAlive(playerNumber: Int): Boolean {
         return playersMap[playerNumber]!!.alive
-    }
-
-    private fun applyTheNightResults() {
-        for (player in 1 until playersMap.size) {
-            val playerData = playersMap[player]
-            if (playerData!!.isToBeDead && !playerData.isToBeHealed && !playerData.alive) {
-                playerData.alive = false
-                killedPlayersList.add(getAlivePlayersNumbersArrayList()[player])
-            }
-        }
     }
 }
