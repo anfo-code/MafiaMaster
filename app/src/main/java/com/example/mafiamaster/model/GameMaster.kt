@@ -259,17 +259,20 @@ class GameMaster(
     }
 
     private fun getPlayerWithMostVotes(): Int {
-        val alivePlayersList = getAlivePlayersNumbersArrayList()
-        val alivePlayersMap = getAlivePlayersMap()
         //Start comparing from the first alive player
-        var numberOfPlayerWithMostVotes = alivePlayersList[0]
-        for (player in 1 until alivePlayersList.size - 1) {
-            if (alivePlayersMap[numberOfPlayerWithMostVotes]!!.votesAmount
-                < alivePlayersMap[alivePlayersList[player]]!!.votesAmount
+        var numberOfPlayerWithMostVotes = 1
+        for (player in 1 until playersMap.size) {
+            Log.i("PLAYER", "$player votes ${playersMap[player]!!.votesAmount}")
+            if (playersMap[numberOfPlayerWithMostVotes]!!.votesAmount
+                < playersMap[player]!!.votesAmount
             ) {
-                numberOfPlayerWithMostVotes = alivePlayersList[player]
+                numberOfPlayerWithMostVotes = player
             }
         }
+        for (player in 1 until playersMap.size - 1) {
+            playersMap[player]!!.votesAmount = 0
+        }
+
         return numberOfPlayerWithMostVotes
     }
 
