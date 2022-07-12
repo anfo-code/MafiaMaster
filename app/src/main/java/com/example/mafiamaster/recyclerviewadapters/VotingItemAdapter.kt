@@ -32,8 +32,8 @@ class VotingItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val player = getPlayer(position)
-        val playerNumber = getPlayerNumber(position)
+        val playerNumber = position + 1
+        val player = getPlayer(playerNumber)
         holder.playersNumberTextView.text = context.getString(R.string.player, playerNumber)
         holder.votesCountTextView.text = player.votesAmount.toString()
         holder.ivAddVotes.setOnClickListener {
@@ -44,19 +44,19 @@ class VotingItemAdapter(
             gameMaster.removeVoteFromPlayer(playerNumber)
             notifyItemChanged(position)
         }
+        if (gameMaster.checkIfPlayerIsAlive(playerNumber)) {
+            holder.clChooseVotesAmount.visibility = View.VISIBLE
+        } else {
+            holder.clChooseVotesAmount.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int {
-        return gameMaster.getAlivePlayersNumbersArrayList().size
+        return gameMaster.getCurrentPlayersMap().size
     }
 
-    private fun getPlayer(position: Int): Player{
-        val playerNumber = getPlayerNumber(position)
-        return gameMaster.getAlivePlayersMap()[playerNumber]!!
-    }
-
-    private fun getPlayerNumber(position: Int): Int{
-        return gameMaster.getAlivePlayersNumbersArrayList()[position]
+    private fun getPlayer(playerNumber: Int): Player{
+        return gameMaster.getCurrentPlayersMap()[playerNumber]!!
     }
 
     inner class ViewHolder(view: View, binding: RowVotingItemBinding) : RecyclerView.ViewHolder(view) {
@@ -64,5 +64,6 @@ class VotingItemAdapter(
         val votesCountTextView = binding.votesCountTextView
         val ivAddVotes = binding.ivAddVotesTextView
         val ivRemoveVotes = binding.ivRemoveVotes
+        val clChooseVotesAmount = binding.clChooseVotesAmount
     }
 }

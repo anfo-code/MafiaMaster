@@ -7,6 +7,7 @@ import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityGameBinding
 import com.example.mafiamaster.model.GameMaster
 import com.example.mafiamaster.model.Player
+import com.example.mafiamaster.recyclerviewadapters.NightActionItemAdapter
 import com.example.mafiamaster.recyclerviewadapters.VotingItemAdapter
 import com.example.mafiamaster.utils.BaseForActivities
 import com.example.mafiamaster.utils.Constants
@@ -82,13 +83,65 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     fun showNightAction() {
         binding.nightActionLayout.visibility = View.VISIBLE
+        binding.dayNightTextView.text = getString(R.string.night)
     }
 
     fun showMafiaAction() {
-
+        binding.dayOrNightImageView.setImageResource(R.drawable.ic_mafia)
+        binding.secondaryTextView.setText(R.string.mafia_kills)
+        setupNightActionList(Constants.MAFIA)
     }
 
-    fun showKilledPlayersRoleAction() {
+    fun showMistressAction() {
+        if (gameMaster.isPlayerWithRolePlaying(Constants.MISTRESS)) {
+            binding.dayOrNightImageView.setImageResource(R.drawable.ic_mistress)
+            binding.secondaryTextView.setText(R.string.mistress_pays_a_visit)
+            setupNightActionList(Constants.MISTRESS)
+        } else {
+            gameMaster.goToTheNextPart()
+        }
+    }
+
+    fun showDoctorAction() {
+        if (gameMaster.isPlayerWithRolePlaying(Constants.DOCTOR)) {
+            binding.dayOrNightImageView.setImageResource(R.drawable.ic_doctor)
+            binding.secondaryTextView.setText(R.string.doctor_heals)
+            setupNightActionList(Constants.DOCTOR)
+            if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.DOCTOR)]!!.isToBeBlocked) {
+
+            }
+        } else {
+            gameMaster.goToTheNextPart()
+        }
+    }
+
+    fun showManiacAction() {
+        if (gameMaster.isPlayerWithRolePlaying(Constants.MANIAC)) {
+            binding.dayOrNightImageView.setImageResource(R.drawable.ic_maniac)
+            binding.secondaryTextView.setText(R.string.maniac_kills)
+            setupNightActionList(Constants.MANIAC)
+            if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.MANIAC)]!!.isToBeBlocked) {
+
+            }
+        } else {
+            gameMaster.goToTheNextPart()
+        }
+    }
+
+    fun showSheriffAction() {
+        if (gameMaster.isPlayerWithRolePlaying(Constants.SHERIFF)) {
+            binding.dayOrNightImageView.setImageResource(R.drawable.ic_sheriff)
+            binding.secondaryTextView.setText(R.string.sheriff_checks)
+            setupNightActionList(Constants.SHERIFF)
+            if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.SHERIFF)]!!.isToBeBlocked) {
+
+            }
+        } else {
+            gameMaster.goToTheNextPart()
+        }
+    }
+
+    fun showKilledPlayersRoleAction(isVoting: Boolean) {
         binding.killedPlayersLayout.visibility = View.VISIBLE
         binding.dayNightTextView.text = getString(R.string.today_victims_are)
         changeSecondaryTextViewTextAccordingToVictimsAmount()
@@ -100,7 +153,20 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
             binding.killedPlayersRoleTextView.visibility = View.VISIBLE
             setKilledPlayersRoleTextView(killedPlayersList)
         }
+
+        if (isVoting) {
+            binding.killedPlayerRoleButton.text = getString(R.string.start_the_night)
+        } else {
+            binding.dayOrNightImageView.setImageDrawable(getDrawable(R.drawable.ic_day))
+            binding.killedPlayerRoleButton.text = getString(R.string.start_the_talk)
+        }
     }
+
+    //TODO !!! встановити результат ночі
+    //TODO !!! встановити путанські чари
+
+    //TODO встановити правильні списки для ночних гравців
+    //TODO MAYBE set the fouls action, but only if everything with the las ones goes smoothly
 
     fun showThreeFoulAction() {
         binding.foulConstraintLayout.visibility = View.VISIBLE
@@ -189,6 +255,12 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.votingRecyclerView.adapter = votingItemAdapter
     }
 
+    private fun setupNightActionList(currentRole: Int) {
+        binding.nightActionsRecyclerView.layoutManager = LinearLayoutManager(this)
+        val nightActionItemAdapter = NightActionItemAdapter(this, gameMaster, currentRole)
+        binding.nightActionsRecyclerView.adapter = nightActionItemAdapter
+    }
+
     private fun changeSecondaryTextViewTextAccordingToVictimsAmount() {
         val killedPlayersList = gameMaster.getKilledPlayersList()
         when (killedPlayersList.size) {
@@ -218,7 +290,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
                 R.string.role_and_role,
                 getRoleNameFromCode(playersMap[killedPlayerList[0]]!!.role),
                 getRoleNameFromCode(playersMap[killedPlayerList[1]]!!.role)
-                )
+            )
         }
     }
 }

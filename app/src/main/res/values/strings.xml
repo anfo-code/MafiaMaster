@@ -30,6 +30,7 @@
     <string name="role_and_role">%1$s та %2$s</string>
     <string name="everybody_is_alive">Всі живі!</string>
     <string name="start_the_night">Розпочати ніч</string>
+    <string name="start_the_talk">Розпочати Балаган</string>
     <string name="confirm">Підтвердити</string>
     <string name="get_extra_vote">Отримати додатковий голос</string>
     <string name="skip_speech">Пропустити промову</string>

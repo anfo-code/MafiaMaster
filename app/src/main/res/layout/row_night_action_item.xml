@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:id="@+id/clMain"
     android:paddingVertical="8dp"
-    android:background="@color/backgroundColor"
     >
 
     <TextView
@@ -23,9 +22,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clChooseVotesAmount"
-        android:layout_width="150dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:background="@color/buttonBorderColor"
+        android:background="@drawable/rectangular_rounded_shape"
         android:layout_marginStart="@dimen/marginBetweenRoleNameAndRoleCount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/playersNumberTextView"
@@ -38,7 +37,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/choose"
-            android:textColor="@color/circularIconForegroundColor"
+            android:textColor="@color/buttonTextColor"
             android:textSize="@dimen/secondaryTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
