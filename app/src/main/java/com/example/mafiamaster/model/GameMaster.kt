@@ -18,6 +18,7 @@ class GameMaster(
     private var playerSpeaking: Int = 1
     private var round = 1
     private var playerSpeakingCount = 1
+    private var winner = 0
 
 
     init {
@@ -128,6 +129,9 @@ class GameMaster(
                 playerData.alive = false
                 killedPlayersList.add(getAlivePlayersNumbersArrayList()[player])
             }
+        }
+        if (checkIfTheGameIsFinished()) {
+            activity.finishTheGame()
         }
     }
 
@@ -265,6 +269,9 @@ class GameMaster(
         val playerToBeExecuted = getPlayerWithMostVotes()
         clearTheVotes()
         killThePlayer(playerToBeExecuted)
+        if (checkIfTheGameIsFinished()) {
+            activity.finishTheGame()
+        }
         goToTheNextPart()
     }
 
@@ -409,5 +416,47 @@ class GameMaster(
 
     fun checkIfPlayerIsAlive(playerNumber: Int): Boolean {
         return playersMap[playerNumber]!!.alive
+    }
+
+    private fun checkIfPlayerWithRoleExists(role: Int): Boolean {
+        for (player in 1..playersMap.size) {
+            if (playersMap[player]!!.role == role) {
+                return true
+            }
+        }
+        return false
+    }
+
+    //returns that the game is finished if amount of dark players equals
+    //the amount of red players and if maniac and doctor are not on the table
+    private fun checkIfTheGameIsFinished(): Boolean {
+        var amountOfBlackPlayers = 0
+        for (player in 1..playersMap.size) {
+            if (playersMap[player]!!.alive) {
+                if (playersMap[player]!!.role == Constants.MAFIA ||
+                    playersMap[player]!!.role == Constants.DON ||
+                    playersMap[player]!!.role == Constants.MISTRESS
+                ) {
+                    amountOfBlackPlayers++
+                }
+            }
+        }
+        val amountOfRedPlayers = getAlivePlayersAmount() - amountOfBlackPlayers
+        if (amountOfRedPlayers / amountOfBlackPlayers == 1 &&
+            checkIfPlayerWithRoleExists(Constants.MANIAC) &&
+            checkIfPlayerWithRoleExists(Constants.DOCTOR)
+        ) {
+            winner = Constants.MAFIA_WINNER
+            return true
+        }
+        if (amountOfBlackPlayers == 0) {
+            winner = Constants.CIVILIANS_WINNER
+            return true
+        }
+        return false
+    }
+
+    fun getWinner(): Int {
+        return winner
     }
 }

@@ -2,6 +2,7 @@ package com.example.mafiamaster.activities
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityGameBinding
@@ -281,6 +282,19 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
                 getRoleNameFromCode(playersMap[killedPlayerList[0]]!!.role),
                 getRoleNameFromCode(playersMap[killedPlayerList[1]]!!.role)
             )
+        }
+    }
+
+    fun finishTheGame() {
+        when(gameMaster.getWinner()) {
+            Constants.MAFIA_WINNER -> {
+                Toast.makeText(this, "Mafia has won!", Toast.LENGTH_LONG).show()
+                finish()
+            }
+            Constants.CIVILIANS_WINNER -> {
+                Toast.makeText(this, "Civilians have won!", Toast.LENGTH_LONG).show()
+                finish()
+            }
         }
     }
 }
