@@ -61,6 +61,7 @@
         android:text="@string/black_players_get_acquaintances"
         android:textColor="@color/circularIconBackgroundColor"
         android:textSize="@dimen/secondaryTextSize"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -215,7 +216,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="30dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -364,5 +365,23 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttonForSkippingActivePlayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="36dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/rectangular_rounded_shape"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingVertical="2dp"
+        android:text="@string/skip_the_player"
+        android:visibility="gone"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

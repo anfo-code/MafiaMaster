@@ -35,6 +35,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.constraintLayoutSkip.setOnClickListener(this)
         binding.buttonFinishVoting.setOnClickListener(this)
         binding.killedPlayerRoleButton.setOnClickListener(this)
+        binding.buttonForSkippingActivePlayer.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -56,6 +57,9 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
                 gameMaster.executePlayerWithMostVotes()
             }
             R.id.killedPlayerRoleButton -> {
+                gameMaster.goToTheNextPart()
+            }
+            R.id.buttonForSkippingActivePlayer -> {
                 gameMaster.goToTheNextPart()
             }
         }
@@ -82,7 +86,6 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     fun showNightAction() {
-        binding.nightActionLayout.visibility = View.VISIBLE
         binding.dayNightTextView.text = getString(R.string.night)
     }
 
@@ -106,9 +109,10 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         if (gameMaster.isPlayerWithRolePlaying(Constants.DOCTOR)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_doctor)
             binding.secondaryTextView.setText(R.string.doctor_heals)
-            setupNightActionList(Constants.DOCTOR)
             if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.DOCTOR)]!!.isToBeBlocked) {
-
+                showActionOfMistressVisiting()
+            } else {
+                setupNightActionList(Constants.DOCTOR)
             }
         } else {
             gameMaster.goToTheNextPart()
@@ -119,9 +123,10 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         if (gameMaster.isPlayerWithRolePlaying(Constants.MANIAC)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_maniac)
             binding.secondaryTextView.setText(R.string.maniac_kills)
-            setupNightActionList(Constants.MANIAC)
             if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.MANIAC)]!!.isToBeBlocked) {
-
+                showActionOfMistressVisiting()
+            } else {
+                setupNightActionList(Constants.MANIAC)
             }
         } else {
             gameMaster.goToTheNextPart()
@@ -132,9 +137,10 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         if (gameMaster.isPlayerWithRolePlaying(Constants.SHERIFF)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_sheriff)
             binding.secondaryTextView.setText(R.string.sheriff_checks)
-            setupNightActionList(Constants.SHERIFF)
             if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.SHERIFF)]!!.isToBeBlocked) {
-
+                showActionOfMistressVisiting()
+            } else {
+                setupNightActionList(Constants.SHERIFF)
             }
         } else {
             gameMaster.goToTheNextPart()
@@ -168,8 +174,14 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     //TODO встановити правильні списки для ночних гравців
     //TODO MAYBE set the fouls action, but only if everything with the las ones goes smoothly
 
+    private fun showActionOfMistressVisiting() {
+        hideAllActions()
+        binding.secondaryTextView.text = getString(R.string.this_player_is_visited_by_mistress)
+        binding.buttonForSkippingActivePlayer.visibility = View.VISIBLE
+    }
+
     fun showThreeFoulAction() {
-        binding.foulConstraintLayout.visibility = View.VISIBLE
+
     }
 
     fun showNightOfGettingAcquaintancesAction() {
@@ -197,36 +209,12 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.killedPlayersLayout.visibility = View.GONE
         binding.foulConstraintLayout.visibility = View.GONE
         binding.nightOfGettingAcquaintancesLayout.visibility = View.GONE
+        binding.buttonForSkippingActivePlayer.visibility = View.GONE
     }
 
     private fun setMafiaGetsAcquaintancesView() {
         binding.dayOrNightImageView.setImageResource(R.drawable.ic_mafia)
         binding.secondaryTextView.text = getString(R.string.black_players_get_acquaintances)
-    }
-
-    private fun setMafiaView() {
-        binding.dayOrNightImageView.setImageResource(R.drawable.ic_mafia)
-        binding.secondaryTextView.text = getString(R.string.mafia_kills)
-    }
-
-    private fun setMistressView() {
-        binding.dayOrNightImageView.setImageResource(R.drawable.ic_mistress)
-        binding.secondaryTextView.text = getString(R.string.mistress_pays_a_visit)
-    }
-
-    private fun setDoctorView() {
-        binding.dayOrNightImageView.setImageResource(R.drawable.ic_doctor)
-        binding.secondaryTextView.text = getString(R.string.doctor_heals)
-    }
-
-    private fun setManiacView() {
-        binding.dayOrNightImageView.setImageResource(R.drawable.ic_maniac)
-        binding.secondaryTextView.text = getString(R.string.maniac_kills)
-    }
-
-    private fun setSheriffView() {
-        binding.dayOrNightImageView.setImageResource(R.drawable.ic_sheriff)
-        binding.secondaryTextView.text = getString(R.string.sheriff_checks)
     }
 
     private fun setDayView() {
@@ -256,6 +244,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     private fun setupNightActionList(currentRole: Int) {
+        binding.nightActionLayout.visibility = View.VISIBLE
         binding.nightActionsRecyclerView.layoutManager = LinearLayoutManager(this)
         val nightActionItemAdapter = NightActionItemAdapter(this, gameMaster, currentRole)
         binding.nightActionsRecyclerView.adapter = nightActionItemAdapter

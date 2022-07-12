@@ -11,6 +11,7 @@
     <string name="mafia_kills">Мафія вбиває</string>
     <string name="mistress_pays_a_visit">Путана відвідує</string>
     <string name="doctor_heals">Доктор лікує</string>
+    <string name="this_player_is_visited_by_mistress">До цього гравця завітала путана</string>
     <string name="sheriff_checks">Комісар перевіряє</string>
     <string name="voting">Голосування</string>
     <string name="maniac_kills">Маньяк вбиває</string>
@@ -30,6 +31,7 @@
     <string name="role_and_role">%1$s та %2$s</string>
     <string name="everybody_is_alive">Всі живі!</string>
     <string name="start_the_night">Розпочати ніч</string>
+    <string name="skip_the_player">Пропустити гравця</string>
     <string name="start_the_talk">Розпочати Балаган</string>
     <string name="confirm">Підтвердити</string>
     <string name="get_extra_vote">Отримати додатковий голос</string>
