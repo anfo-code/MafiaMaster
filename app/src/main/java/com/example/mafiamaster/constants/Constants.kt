@@ -1,4 +1,4 @@
-package com.example.mafiamaster.utils
+package com.example.mafiamaster.constants
 
 object Constants {
     const val MAFIA = 0

@@ -1,4 +1,4 @@
-package com.example.mafiamaster.utils
+package com.example.mafiamaster.constants
 
 object GameFlowConstants {
     const val NIGHT_OF_GETTING_ACQUAINTANCES = 1

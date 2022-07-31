@@ -6,8 +6,8 @@ import android.view.View
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityRolesBinding
 import com.example.mafiamaster.model.Player
-import com.example.mafiamaster.utils.BaseForActivities
-import com.example.mafiamaster.utils.Constants
+import com.example.mafiamaster.modelview.BaseForActivities
+import com.example.mafiamaster.constants.Constants
 
 class RolesActivity : BaseForActivities(), View.OnClickListener {
 

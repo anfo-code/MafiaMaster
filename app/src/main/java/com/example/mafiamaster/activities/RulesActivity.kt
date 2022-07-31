@@ -3,7 +3,7 @@ package com.example.mafiamaster.activities
 import android.os.Bundle
 import android.view.View
 import com.example.mafiamaster.databinding.ActivityRulesBinding
-import com.example.mafiamaster.utils.BaseForActivities
+import com.example.mafiamaster.modelview.BaseForActivities
 
 class RulesActivity : BaseForActivities(), View.OnClickListener {
     private lateinit var binding: ActivityRulesBinding

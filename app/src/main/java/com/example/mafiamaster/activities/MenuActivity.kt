@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityMenuBinding
-import com.example.mafiamaster.utils.BaseForActivities
+import com.example.mafiamaster.modelview.BaseForActivities
 
 class MenuActivity : BaseForActivities(), View.OnClickListener {
 

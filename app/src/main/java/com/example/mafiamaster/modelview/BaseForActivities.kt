@@ -1,4 +1,4 @@
-package com.example.mafiamaster.utils
+package com.example.mafiamaster.modelview
 
 import android.content.SharedPreferences
 import android.os.Handler
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.mafiamaster.R
+import com.example.mafiamaster.constants.Constants
 
 open class BaseForActivities: AppCompatActivity() {
 

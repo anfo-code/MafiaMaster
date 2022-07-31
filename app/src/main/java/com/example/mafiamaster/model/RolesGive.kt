@@ -1,6 +1,6 @@
 package com.example.mafiamaster.model
 
-import com.example.mafiamaster.utils.Constants
+import com.example.mafiamaster.constants.Constants
 import kotlin.random.Random
 
 class RolesGive(private val rolesCountHandler: RolesCountHandler) {

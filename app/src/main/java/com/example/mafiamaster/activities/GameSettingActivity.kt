@@ -7,8 +7,8 @@ import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityGameSettingBinding
 import com.example.mafiamaster.model.RolesCountHandler
 import com.example.mafiamaster.model.RolesGive
-import com.example.mafiamaster.utils.BaseForActivities
-import com.example.mafiamaster.utils.Constants
+import com.example.mafiamaster.modelview.BaseForActivities
+import com.example.mafiamaster.constants.Constants
 
 class GameSettingActivity : BaseForActivities(), View.OnClickListener {
 

@@ -6,19 +6,19 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.ActivityGameBinding
-import com.example.mafiamaster.model.GameMaster
+import com.example.mafiamaster.modelview.GameModelView
 import com.example.mafiamaster.model.Player
 import com.example.mafiamaster.recyclerviewadapters.NightActionItemAdapter
 import com.example.mafiamaster.recyclerviewadapters.VotingItemAdapter
-import com.example.mafiamaster.utils.BaseForActivities
-import com.example.mafiamaster.utils.Constants
-import com.example.mafiamaster.utils.TimerHandler
+import com.example.mafiamaster.modelview.BaseForActivities
+import com.example.mafiamaster.constants.Constants
+import com.example.mafiamaster.modelview.TimerHandler
 
 class GameActivity : BaseForActivities(), View.OnClickListener {
 
     private lateinit var binding: ActivityGameBinding
     private var playersMap: HashMap<Int, Player> = HashMap()
-    private lateinit var gameMaster: GameMaster
+    private lateinit var gameModelView: GameModelView
     private lateinit var timerHandler: TimerHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,8 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         setContentView(binding.root)
 
         getPlayersMapFromIntent()
-        gameMaster = GameMaster(playersMap, this)
-        timerHandler = TimerHandler(binding, gameMaster, this)
+        gameModelView = GameModelView(playersMap, this)
+        timerHandler = TimerHandler(binding, gameModelView, this)
 
 
         binding.buttonFinishTheNightOfGettingAcquaintances.setOnClickListener(this)
@@ -42,7 +42,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.buttonFinishTheNightOfGettingAcquaintances -> {
-                gameMaster.goToThePartAfterGettingAcquaintances()
+                gameModelView.goToThePartAfterGettingAcquaintances()
             }
             R.id.constraintLayoutPauseStart -> {
                 if (timerHandler.isTimerPaused()) {
@@ -55,13 +55,13 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
                 timerHandler.skipTimer()
             }
             R.id.buttonFinishVoting -> {
-                gameMaster.executePlayerWithMostVotes()
+                gameModelView.executePlayerWithMostVotes()
             }
             R.id.killedPlayerRoleButton -> {
-                gameMaster.goToTheNextPart()
+                gameModelView.goToTheNextPart()
             }
             R.id.buttonForSkippingActivePlayer -> {
-                gameMaster.goToTheNextPart()
+                gameModelView.goToTheNextPart()
             }
         }
     }
@@ -97,54 +97,54 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     fun showMistressAction() {
-        if (gameMaster.isPlayerWithRolePlaying(Constants.MISTRESS)) {
+        if (gameModelView.isPlayerWithRolePlaying(Constants.MISTRESS)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_mistress)
             binding.secondaryTextView.setText(R.string.mistress_pays_a_visit)
             setupNightActionList(Constants.MISTRESS)
         } else {
-            gameMaster.goToTheNextPart()
+            gameModelView.goToTheNextPart()
         }
     }
 
     fun showDoctorAction() {
-        if (gameMaster.isPlayerWithRolePlaying(Constants.DOCTOR)) {
+        if (gameModelView.isPlayerWithRolePlaying(Constants.DOCTOR)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_doctor)
             binding.secondaryTextView.setText(R.string.doctor_heals)
-            if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.DOCTOR)]!!.isToBeBlocked) {
+            if (gameModelView.getCurrentPlayersMap()[gameModelView.findPlayerWithRole(Constants.DOCTOR)]!!.isToBeBlocked) {
                 showActionOfMistressVisiting()
             } else {
                 setupNightActionList(Constants.DOCTOR)
             }
         } else {
-            gameMaster.goToTheNextPart()
+            gameModelView.goToTheNextPart()
         }
     }
 
     fun showManiacAction() {
-        if (gameMaster.isPlayerWithRolePlaying(Constants.MANIAC)) {
+        if (gameModelView.isPlayerWithRolePlaying(Constants.MANIAC)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_maniac)
             binding.secondaryTextView.setText(R.string.maniac_kills)
-            if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.MANIAC)]!!.isToBeBlocked) {
+            if (gameModelView.getCurrentPlayersMap()[gameModelView.findPlayerWithRole(Constants.MANIAC)]!!.isToBeBlocked) {
                 showActionOfMistressVisiting()
             } else {
                 setupNightActionList(Constants.MANIAC)
             }
         } else {
-            gameMaster.goToTheNextPart()
+            gameModelView.goToTheNextPart()
         }
     }
 
     fun showSheriffAction() {
-        if (gameMaster.isPlayerWithRolePlaying(Constants.SHERIFF)) {
+        if (gameModelView.isPlayerWithRolePlaying(Constants.SHERIFF)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_sheriff)
             binding.secondaryTextView.setText(R.string.sheriff_checks)
-            if (gameMaster.getCurrentPlayersMap()[gameMaster.findPlayerWithRole(Constants.SHERIFF)]!!.isToBeBlocked) {
+            if (gameModelView.getCurrentPlayersMap()[gameModelView.findPlayerWithRole(Constants.SHERIFF)]!!.isToBeBlocked) {
                 showActionOfMistressVisiting()
             } else {
                 setupNightActionList(Constants.SHERIFF)
             }
         } else {
-            gameMaster.goToTheNextPart()
+            gameModelView.goToTheNextPart()
         }
     }
 
@@ -152,7 +152,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.killedPlayersLayout.visibility = View.VISIBLE
         binding.dayNightTextView.text = getString(R.string.today_victims_are)
         changeSecondaryTextViewTextAccordingToVictimsAmount()
-        val killedPlayersList = gameMaster.getKilledPlayersList()
+        val killedPlayersList = gameModelView.getKilledPlayersList()
 
         if (killedPlayersList.size == 0) {
             binding.killedPlayersRoleTextView.visibility = View.GONE
@@ -168,9 +168,6 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
             binding.killedPlayerRoleButton.text = getString(R.string.start_the_talk)
         }
     }
-
-    //TODO !!! встановити результат ночі
-    //TODO !!! встановити путанські чари
 
     //TODO встановити правильні списки для ночних гравців
     //TODO MAYBE set the fouls action, but only if everything with the las ones goes smoothly
@@ -200,7 +197,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     fun startCurrentPlayerSpeech() {
         startSpeechTimer()
         binding.secondaryTextView.text =
-            getString(R.string.speech_of_player, gameMaster.getCurrentPlayerSpeaking())
+            getString(R.string.speech_of_player, gameModelView.getCurrentPlayerSpeaking())
     }
 
     fun hideAllActions() {
@@ -240,7 +237,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
 
     private fun setupVotingList() {
         binding.votingRecyclerView.layoutManager = LinearLayoutManager(this)
-        val votingItemAdapter = VotingItemAdapter(this, gameMaster)
+        val votingItemAdapter = VotingItemAdapter(this, gameModelView)
         binding.votingRecyclerView.adapter = votingItemAdapter
     }
 
@@ -248,12 +245,12 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.buttonForSkippingActivePlayer.visibility = View.GONE
         binding.nightActionLayout.visibility = View.VISIBLE
         binding.nightActionsRecyclerView.layoutManager = LinearLayoutManager(this)
-        val nightActionItemAdapter = NightActionItemAdapter(this, gameMaster, currentRole)
+        val nightActionItemAdapter = NightActionItemAdapter(this, gameModelView, currentRole)
         binding.nightActionsRecyclerView.adapter = nightActionItemAdapter
     }
 
     private fun changeSecondaryTextViewTextAccordingToVictimsAmount() {
-        val killedPlayersList = gameMaster.getKilledPlayersList()
+        val killedPlayersList = gameModelView.getKilledPlayersList()
         when (killedPlayersList.size) {
             0 -> {
                 binding.secondaryTextView.text = getString(R.string.everybody_is_alive)
@@ -286,7 +283,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     fun finishTheGame() {
-        when(gameMaster.getWinner()) {
+        when(gameModelView.getWinner()) {
             Constants.MAFIA_WINNER -> {
                 Toast.makeText(this, "Mafia has won!", Toast.LENGTH_LONG).show()
                 finish()

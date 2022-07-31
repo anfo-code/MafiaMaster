@@ -2,197 +2,39 @@ package com.example.mafiamaster.model
 
 import android.util.Log
 import com.example.mafiamaster.activities.GameActivity
-import com.example.mafiamaster.utils.Constants
-import com.example.mafiamaster.utils.GameFlowConstants
+import com.example.mafiamaster.constants.Constants
+import com.example.mafiamaster.constants.GameFlowConstants
 
-class GameMaster(
+open class GameModel(
     private val playersMap: HashMap<Int, Player>,
-    private val activity: GameActivity,
-) {
+    private val activity: GameActivity
+    ) {
 
-    private var isGameOver: Boolean = false
-    private var currentPart = GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES
-    private var isSomebodyKilled = false
-    private var isFirstSpeech = true
-    private var killedPlayersList: ArrayList<Int> = ArrayList()
-    private var playerSpeaking: Int = 1
-    private var round = 1
-    private var playerSpeakingCount = 1
-    private var winner = 0
-
+    protected lateinit var gameData : GameData
 
     init {
-        startCurrentPart()
+        setGameData()
     }
 
-    private fun startCurrentPart() {
-        when (currentPart) {
-            GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES -> {
-                startNightOfGettingAcquaintances()
-            }
-            GameFlowConstants.NIGHT -> {
-                startNight()
-            }
-            GameFlowConstants.MAFIA_KILLS -> {
-                startMafiaAction()
-            }
-            GameFlowConstants.MISTRESS_PAYS_A_VISIT -> {
-                startMistressAction()
-            }
-            GameFlowConstants.DOCTOR_HEALS -> {
-                startDoctorAction()
-            }
-            GameFlowConstants.MANIAC_KILLS -> {
-                startManiacAction()
-            }
-            GameFlowConstants.SHERIFF_CHECKS -> {
-                startSheriffAction()
-            }
-            GameFlowConstants.LAST_WORDS_AFTER_NIGHT -> {
-                sumUpNightResult()
-                startLastWords()
-            }
-            GameFlowConstants.TALK -> {
-                startTalk()
-            }
-            GameFlowConstants.SPEECHES -> {
-                startSpeeches()
-            }
-            GameFlowConstants.VOTING -> {
-                startVoting()
-            }
-            GameFlowConstants.LAST_WORDS_AFTER_VOTING -> {
-                startLastWords()
-            }
-
-        }
+    private fun setGameData() {
+        gameData = GameData(playersMap)
     }
 
-    fun goToTheNextPart() {
-        if (isGameOver) {
-            finishTheGame()
-        } else {
-            if (currentPart == GameFlowConstants.LAST_WORDS_AFTER_VOTING) {
-                currentPart = GameFlowConstants.NIGHT
-                startCurrentPart()
-            } else {
-                currentPart++
-                startCurrentPart()
-            }
-        }
+    protected fun setTheNextPart() {
+        gameData.currentPart++
     }
 
-    fun goToThePartAfterGettingAcquaintances() {
-        currentPart = GameFlowConstants.TALK
-        startCurrentPart()
+    protected fun setNightPart() {
+        gameData.currentPart = GameFlowConstants.NIGHT
     }
 
-    private fun startNightOfGettingAcquaintances() {
-        activity.hideAllActions()
-        activity.showNightOfGettingAcquaintancesAction()
+    protected fun setTalkPart() {
+        gameData.currentPart = GameFlowConstants.TALK
     }
 
-    private fun startTalk() {
-        activity.hideAllActions()
-        activity.showTalkAction()
-        killedPlayersList = ArrayList()
-    }
+    //TODO old code starts below
 
-    private fun startSpeeches() {
-        if (isFirstSpeech) {
-            setFirstSpeaker()
-        } else {
-            nextPlayerSpeech()
-        }
-        activity.startCurrentPlayerSpeech()
-    }
-
-    private fun setFirstSpeaker() {
-        for (player in round until playersMap.size) {
-            if (playersMap[player]!!.alive) {
-                playerSpeaking = player
-                break
-            }
-        }
-        isFirstSpeech = false
-    }
-
-    private fun startVoting() {
-        activity.hideAllActions()
-        activity.showVotingAction()
-    }
-
-    private fun sumUpNightResult() {
-        for (player in 1 until playersMap.size) {
-            val playerData = playersMap[player]
-            if (playerData!!.isToBeDead && !playerData.isToBeHealed && playerData.alive) {
-                playerData.alive = false
-                killedPlayersList.add(getAlivePlayersNumbersArrayList()[player])
-            }
-        }
-        if (checkIfTheGameIsFinished()) {
-            activity.finishTheGame()
-        }
-    }
-
-    private fun startLastWords() {
-        if (isSomebodyKilled) {
-            activity.hideAllActions()
-            activity.showKilledPlayersRoleAction(isVoting())
-        } else {
-
-        }
-    }
-
-    private fun startNight() {
-        killedPlayersList = ArrayList()
-        activity.hideAllActions()
-        activity.showNightAction()
-        goToTheNextPart()
-    }
-
-    private fun startMafiaAction() {
-        activity.showMafiaAction()
-    }
-
-    private fun startMistressAction() {
-        activity.showMistressAction()
-    }
-
-    private fun startDoctorAction() {
-        activity.showDoctorAction()
-    }
-
-    private fun startManiacAction() {
-        activity.showManiacAction()
-    }
-
-    private fun startSheriffAction() {
-        activity.showSheriffAction()
-    }
-
-    private fun finishTheGame() {
-
-    }
-
-    fun timerFinished() {
-        when (currentPart) {
-            GameFlowConstants.TALK -> {
-                goToTheNextPart()
-            }
-            GameFlowConstants.SPEECHES -> {
-                if (playerSpeakingCount == getAlivePlayersAmount() + round - 1) {
-                    playerSpeakingCount -= getAlivePlayersAmount() - round
-                    round++
-                    goToTheNextPart()
-                } else {
-                    nextPlayerSpeech()
-                }
-            }
-        }
-    }
-
-    private fun getAlivePlayersAmount(): Int {
+    protected fun getAlivePlayersAmount(): Int {
         var alivePlayersAmount = 0
         for (player in 1..playersMap.size) {
             if (playersMap[player]!!.alive) {
@@ -202,8 +44,9 @@ class GameMaster(
         return alivePlayersAmount
     }
 
-    private fun nextPlayerSpeech() {
-        playerSpeaking = getPlayerByCount()
+
+    protected fun nextPlayerSpeech() {
+        gameData.playerSpeaking = getPlayerByCount()
         activity.startCurrentPlayerSpeech()
     }
 
@@ -213,22 +56,18 @@ class GameMaster(
         val playerFromCount: Int
 
         val alivePlayersList = getAlivePlayersNumbersArrayList()
-        var playerInArray = playerSpeakingCount
+        var playerInArray = gameData.playerSpeakingCount
 
         if (playerInArray > alivePlayersList.size - 1) {
-            playerInArray = playerSpeakingCount - alivePlayersList.size
+            playerInArray = gameData.playerSpeakingCount - alivePlayersList.size
         }
 
         Log.i("PLAYER", playerInArray.toString())
         playerFromCount = alivePlayersList[playerInArray]
 
-        playerSpeakingCount++
+        gameData.playerSpeakingCount++
 
         return playerFromCount
-    }
-
-    fun getCurrentPlayerSpeaking(): Int {
-        return playerSpeaking
     }
 
     fun addVoteToPlayer(player: Int) {
@@ -239,20 +78,6 @@ class GameMaster(
         if (playersMap[player]!!.votesAmount > 0) {
             playersMap[player]!!.votesAmount--
         }
-    }
-
-    fun getCurrentPlayersMap(): HashMap<Int, Player> {
-        return playersMap
-    }
-
-    fun getAlivePlayersMap(): HashMap<Int, Player> {
-        val alivePlayersMap: HashMap<Int, Player> = HashMap()
-        for (player in 1..playersMap.size) {
-            if (playersMap[player]!!.alive) {
-                alivePlayersMap[player] = playersMap[player]!!
-            }
-        }
-        return alivePlayersMap
     }
 
     private fun getAlivePlayersNumbersArrayList(): ArrayList<Int> {
@@ -272,7 +97,7 @@ class GameMaster(
         if (checkIfTheGameIsFinished()) {
             activity.finishTheGame()
         }
-        goToTheNextPart()
+        setTheNextPart()
     }
 
     private fun getPlayerWithMostVotes(): Int {
@@ -301,16 +126,12 @@ class GameMaster(
 
     private fun killThePlayer(playerNumber: Int) {
         playersMap[playerNumber]!!.alive = false
-        killedPlayersList.add(playerNumber)
-        isSomebodyKilled = true
-    }
-
-    fun getKilledPlayersList(): ArrayList<Int> {
-        return killedPlayersList
+        gameData.killedPlayersList.add(playerNumber)
+        gameData.isSomebodyKilled = true
     }
 
     fun chooseThePlayer(playerNumber: Int) {
-        when (currentPart) {
+        when (gameData.currentPart) {
             GameFlowConstants.MAFIA_KILLS -> {
                 playersMap[playerNumber]!!.isToBeDead = true
             }
@@ -331,7 +152,7 @@ class GameMaster(
                 playersMap[playerNumber]!!.isChecked = true
             }
         }
-        goToTheNextPart()
+        setTheNextPart()
     }
 
     private fun removeHealStreaks(playerToBeLeft: Int) {
@@ -354,8 +175,8 @@ class GameMaster(
     fun isPlayerWithRolePlaying(role: Int): Boolean {
         var isPlaying = false
         for (player in 1..playersMap.size) {
-            val player = playersMap[player]
-            if (player!!.role == role && player.alive) {
+            val playerInfo = playersMap[player]
+            if (playerInfo!!.role == role && playerInfo.alive) {
                 isPlaying = true
             }
         }
@@ -372,8 +193,8 @@ class GameMaster(
         return playerWithRole
     }
 
-    private fun isVoting(): Boolean {
-        return currentPart == GameFlowConstants.LAST_WORDS_AFTER_VOTING
+    protected fun isVoting(): Boolean {
+        return gameData.currentPart == GameFlowConstants.LAST_WORDS_AFTER_VOTING
     }
 
     //Since I want killing roles to be able to kill themselves
@@ -427,9 +248,9 @@ class GameMaster(
         return false
     }
 
-    //returns that the game is finished if amount of dark players equals
+    //returns that the game is finished if amount of black players equals
     //the amount of red players and if maniac and doctor are not on the table
-    private fun checkIfTheGameIsFinished(): Boolean {
+    protected fun checkIfTheGameIsFinished(): Boolean {
         var amountOfBlackPlayers = 0
         for (player in 1..playersMap.size) {
             if (playersMap[player]!!.alive) {
@@ -443,20 +264,17 @@ class GameMaster(
         }
         val amountOfRedPlayers = getAlivePlayersAmount() - amountOfBlackPlayers
         if (amountOfRedPlayers / amountOfBlackPlayers == 1 &&
+            amountOfRedPlayers % amountOfBlackPlayers == 0 &&
             checkIfPlayerWithRoleExists(Constants.MANIAC) &&
             checkIfPlayerWithRoleExists(Constants.DOCTOR)
         ) {
-            winner = Constants.MAFIA_WINNER
+            gameData.winner = Constants.MAFIA_WINNER
             return true
         }
         if (amountOfBlackPlayers == 0) {
-            winner = Constants.CIVILIANS_WINNER
+            gameData.winner = Constants.CIVILIANS_WINNER
             return true
         }
         return false
-    }
-
-    fun getWinner(): Int {
-        return winner
     }
 }

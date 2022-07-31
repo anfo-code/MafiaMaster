@@ -7,16 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.RowNightActionItemBinding
-import com.example.mafiamaster.databinding.RowVotingItemBinding
-import com.example.mafiamaster.model.GameMaster
-import com.example.mafiamaster.model.Player
-import com.example.mafiamaster.utils.Constants
-import com.example.mafiamaster.utils.GameFlowConstants
+import com.example.mafiamaster.modelview.GameModelView
 
 //The entered Hash map, must be a hash map, having only alive players in it
 class NightActionItemAdapter(
     val context: Context,
-    private val gameMaster: GameMaster,
+    private val gameModelView: GameModelView,
     private val currentRole: Int
 ) :
     RecyclerView.Adapter<NightActionItemAdapter.ViewHolder>() {
@@ -37,13 +33,13 @@ class NightActionItemAdapter(
         val playerNumber = position + 1
         holder.playersNumberTextView.text = context.getString(R.string.player, playerNumber)
         holder.chooseThePlayer.setOnClickListener {
-            gameMaster.chooseThePlayer(playerNumber)
+            gameModelView.chooseThePlayer(playerNumber)
         }
         //Since removing players row is way too complicated
         //To implement, I am just removing possibility to
         //Make some action with unavailable players
-        if (gameMaster.isPlayerMustBeShown(playerNumber, currentRole) &&
-            gameMaster.checkIfPlayerIsAlive(playerNumber)) {
+        if (gameModelView.isPlayerMustBeShown(playerNumber, currentRole) &&
+            gameModelView.checkIfPlayerIsAlive(playerNumber)) {
             holder.chooseThePlayer.visibility = View.VISIBLE
         } else {
             holder.chooseThePlayer.visibility = View.GONE
@@ -51,7 +47,7 @@ class NightActionItemAdapter(
     }
 
     override fun getItemCount(): Int {
-        return gameMaster.getCurrentPlayersMap().size
+        return gameModelView.getCurrentPlayersMap().size
     }
 
     inner class ViewHolder(view: View, binding: RowNightActionItemBinding) :

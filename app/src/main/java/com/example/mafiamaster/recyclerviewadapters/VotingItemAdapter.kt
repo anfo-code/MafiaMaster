@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mafiamaster.R
 import com.example.mafiamaster.databinding.RowVotingItemBinding
-import com.example.mafiamaster.model.GameMaster
+import com.example.mafiamaster.modelview.GameModelView
 import com.example.mafiamaster.model.Player
 
 //The entered Hash map, must be a hash map, having only alive players in it
 class VotingItemAdapter(
     val context: Context,
-    private val gameMaster: GameMaster
+    private val gameModelView: GameModelView
 ) :
     RecyclerView.Adapter<VotingItemAdapter.ViewHolder>() {
 
@@ -25,7 +25,7 @@ class VotingItemAdapter(
         viewType: Int
     ): ViewHolder {
         binding = RowVotingItemBinding.inflate(LayoutInflater.from(context))
-        playersMap = gameMaster.getAlivePlayersMap()
+        playersMap = gameModelView.getCurrentPlayersMap()
         return ViewHolder(
             binding.root, binding
         )
@@ -37,14 +37,14 @@ class VotingItemAdapter(
         holder.playersNumberTextView.text = context.getString(R.string.player, playerNumber)
         holder.votesCountTextView.text = player.votesAmount.toString()
         holder.ivAddVotes.setOnClickListener {
-            gameMaster.addVoteToPlayer(playerNumber)
+            gameModelView.addVoteToPlayer(playerNumber)
             notifyItemChanged(position)
         }
         holder.ivRemoveVotes.setOnClickListener {
-            gameMaster.removeVoteFromPlayer(playerNumber)
+            gameModelView.removeVoteFromPlayer(playerNumber)
             notifyItemChanged(position)
         }
-        if (gameMaster.checkIfPlayerIsAlive(playerNumber)) {
+        if (gameModelView.checkIfPlayerIsAlive(playerNumber)) {
             holder.clChooseVotesAmount.visibility = View.VISIBLE
         } else {
             holder.clChooseVotesAmount.visibility = View.GONE
@@ -52,11 +52,11 @@ class VotingItemAdapter(
     }
 
     override fun getItemCount(): Int {
-        return gameMaster.getCurrentPlayersMap().size
+        return gameModelView.getCurrentPlayersMap().size
     }
 
     private fun getPlayer(playerNumber: Int): Player{
-        return gameMaster.getCurrentPlayersMap()[playerNumber]!!
+        return gameModelView.getCurrentPlayersMap()[playerNumber]!!
     }
 
     inner class ViewHolder(view: View, binding: RowVotingItemBinding) : RecyclerView.ViewHolder(view) {

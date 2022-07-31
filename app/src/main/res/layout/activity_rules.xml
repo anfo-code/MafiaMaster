@@ -11,7 +11,8 @@
         android:id="@+id/frameLayoutOfToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarMain"
             android:layout_width="match_parent"
@@ -20,16 +21,16 @@
             android:theme="@style/CustomToolBarStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat_alternates_medium"
                 android:text="@string/rules"
                 android:textColor="@color/toolbarTextAndIconColor"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:fontFamily="@font/montserrat_alternates_medium" />
+                android:textSize="20sp" />
 
         </androidx.appcompat.widget.Toolbar>
     </FrameLayout>
