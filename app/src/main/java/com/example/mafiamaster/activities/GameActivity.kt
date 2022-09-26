@@ -56,6 +56,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
             }
             R.id.buttonFinishVoting -> {
                 gameModelView.executePlayerWithMostVotes()
+                gameModelView.goToTheNextPart()
             }
             R.id.killedPlayerRoleButton -> {
                 gameModelView.goToTheNextPart()
@@ -97,7 +98,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     fun showMistressAction() {
-        if (gameModelView.isPlayerWithRolePlaying(Constants.MISTRESS)) {
+        if (gameModelView.getIfAPlayerWithRolePlaying(Constants.MISTRESS)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_mistress)
             binding.secondaryTextView.setText(R.string.mistress_pays_a_visit)
             setupNightActionList(Constants.MISTRESS)
@@ -107,10 +108,10 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     fun showDoctorAction() {
-        if (gameModelView.isPlayerWithRolePlaying(Constants.DOCTOR)) {
+        if (gameModelView.getIfAPlayerWithRolePlaying(Constants.DOCTOR)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_doctor)
             binding.secondaryTextView.setText(R.string.doctor_heals)
-            if (gameModelView.getCurrentPlayersMap()[gameModelView.findPlayerWithRole(Constants.DOCTOR)]!!.isToBeBlocked) {
+            if (gameModelView.getCurrentGameData().playersMap[gameModelView.getPlayerWithRole(Constants.DOCTOR)]!!.isToBeBlocked) {
                 showActionOfMistressVisiting()
             } else {
                 setupNightActionList(Constants.DOCTOR)
@@ -121,10 +122,10 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     fun showManiacAction() {
-        if (gameModelView.isPlayerWithRolePlaying(Constants.MANIAC)) {
+        if (gameModelView.getIfAPlayerWithRolePlaying(Constants.MANIAC)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_maniac)
             binding.secondaryTextView.setText(R.string.maniac_kills)
-            if (gameModelView.getCurrentPlayersMap()[gameModelView.findPlayerWithRole(Constants.MANIAC)]!!.isToBeBlocked) {
+            if (gameModelView.getCurrentGameData().playersMap[gameModelView.getPlayerWithRole(Constants.MANIAC)]!!.isToBeBlocked) {
                 showActionOfMistressVisiting()
             } else {
                 setupNightActionList(Constants.MANIAC)
@@ -135,10 +136,10 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     fun showSheriffAction() {
-        if (gameModelView.isPlayerWithRolePlaying(Constants.SHERIFF)) {
+        if (gameModelView.getIfAPlayerWithRolePlaying(Constants.SHERIFF)) {
             binding.dayOrNightImageView.setImageResource(R.drawable.ic_sheriff)
             binding.secondaryTextView.setText(R.string.sheriff_checks)
-            if (gameModelView.getCurrentPlayersMap()[gameModelView.findPlayerWithRole(Constants.SHERIFF)]!!.isToBeBlocked) {
+            if (gameModelView.getCurrentGameData().playersMap[gameModelView.getPlayerWithRole(Constants.SHERIFF)]!!.isToBeBlocked) {
                 showActionOfMistressVisiting()
             } else {
                 setupNightActionList(Constants.SHERIFF)
@@ -152,7 +153,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         binding.killedPlayersLayout.visibility = View.VISIBLE
         binding.dayNightTextView.text = getString(R.string.today_victims_are)
         changeSecondaryTextViewTextAccordingToVictimsAmount()
-        val killedPlayersList = gameModelView.getKilledPlayersList()
+        val killedPlayersList = gameModelView.getCurrentGameData().killedPlayersList
 
         if (killedPlayersList.size == 0) {
             binding.killedPlayersRoleTextView.visibility = View.GONE
@@ -168,9 +169,13 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
             binding.killedPlayerRoleButton.text = getString(R.string.start_the_talk)
         }
     }
-
-    //TODO встановити правильні списки для ночних гравців
-    //TODO MAYBE set the fouls action, but only if everything with the las ones goes smoothly
+    
+    //TODO debug night actions (doesn't move on from mafia)
+    //TODO add checked player's role showing
+    //TODO reformat the list in RolesActivity
+    //TODO create GameFinishActivity
+    //TODO set the fouls action
+    //TODO fix display bugs
 
     private fun showActionOfMistressVisiting() {
         hideAllActions()
@@ -197,7 +202,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     fun startCurrentPlayerSpeech() {
         startSpeechTimer()
         binding.secondaryTextView.text =
-            getString(R.string.speech_of_player, gameModelView.getCurrentPlayerSpeaking())
+            getString(R.string.speech_of_player, gameModelView.getCurrentGameData().playerSpeaking)
     }
 
     fun hideAllActions() {
@@ -250,7 +255,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     private fun changeSecondaryTextViewTextAccordingToVictimsAmount() {
-        val killedPlayersList = gameModelView.getKilledPlayersList()
+        val killedPlayersList = gameModelView.getCurrentGameData().killedPlayersList
         when (killedPlayersList.size) {
             0 -> {
                 binding.secondaryTextView.text = getString(R.string.everybody_is_alive)
@@ -283,7 +288,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     fun finishTheGame() {
-        when(gameModelView.getWinner()) {
+        when(gameModelView.getCurrentGameData().winner) {
             Constants.MAFIA_WINNER -> {
                 Toast.makeText(this, "Mafia has won!", Toast.LENGTH_LONG).show()
                 finish()

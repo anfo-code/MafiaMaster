@@ -20,6 +20,10 @@ open class GameModel(
         gameData = GameData(playersMap)
     }
 
+    fun getCurrentGameData(): GameData {
+        return gameData
+    }
+
     protected fun setTheNextPart() {
         gameData.currentPart++
     }
@@ -32,8 +36,6 @@ open class GameModel(
         gameData.currentPart = GameFlowConstants.TALK
     }
 
-    //TODO old code starts below
-
     protected fun getAlivePlayersAmount(): Int {
         var alivePlayersAmount = 0
         for (player in 1..playersMap.size) {
@@ -44,15 +46,9 @@ open class GameModel(
         return alivePlayersAmount
     }
 
-
-    protected fun nextPlayerSpeech() {
-        gameData.playerSpeaking = getPlayerByCount()
-        activity.startCurrentPlayerSpeech()
-    }
-
     //this function gets an alive player by playerSpeaking count
     //if current playerSpeaker is 3, it gets third alive player in the list
-    private fun getPlayerByCount(): Int {
+    protected fun getPlayerByCount(): Int {
         val playerFromCount: Int
 
         val alivePlayersList = getAlivePlayersNumbersArrayList()
@@ -70,40 +66,10 @@ open class GameModel(
         return playerFromCount
     }
 
-    fun addVoteToPlayer(player: Int) {
-        playersMap[player]!!.votesAmount++
-    }
-
-    fun removeVoteFromPlayer(player: Int) {
-        if (playersMap[player]!!.votesAmount > 0) {
-            playersMap[player]!!.votesAmount--
-        }
-    }
-
-    private fun getAlivePlayersNumbersArrayList(): ArrayList<Int> {
-        val alivePlayersNumberArrayList: ArrayList<Int> = ArrayList()
-        for (player in 1..playersMap.size) {
-            if (playersMap[player]!!.alive) {
-                alivePlayersNumberArrayList.add(player)
-            }
-        }
-        return alivePlayersNumberArrayList
-    }
-
-    fun executePlayerWithMostVotes() {
-        val playerToBeExecuted = getPlayerWithMostVotes()
-        clearTheVotes()
-        killThePlayer(playerToBeExecuted)
-        if (checkIfTheGameIsFinished()) {
-            activity.finishTheGame()
-        }
-        setTheNextPart()
-    }
-
     private fun getPlayerWithMostVotes(): Int {
         //Start comparing from the first alive player
         var numberOfPlayerWithMostVotes = 1
-        for (player in 1 until playersMap.size) {
+        for (player in 1 until playersMap.size + 1) {
             Log.i("PLAYER", "$player votes ${playersMap[player]!!.votesAmount}")
             if (playersMap[numberOfPlayerWithMostVotes]!!.votesAmount
                 < playersMap[player]!!.votesAmount
@@ -118,6 +84,61 @@ open class GameModel(
         return numberOfPlayerWithMostVotes
     }
 
+    private fun getAlivePlayersNumbersArrayList(): ArrayList<Int> {
+        val alivePlayersNumberArrayList: ArrayList<Int> = ArrayList()
+        for (player in 1..playersMap.size) {
+            if (playersMap[player]!!.alive) {
+                alivePlayersNumberArrayList.add(player)
+            }
+        }
+        return alivePlayersNumberArrayList
+    }
+
+    //returns true only if player of asked role exists AND is alive
+    fun getIfAPlayerWithRolePlaying(role: Int): Boolean {
+        var isPlaying = false
+        for (player in 1..playersMap.size) {
+            val playerInfo = playersMap[player]
+            if (playerInfo!!.role == role && playerInfo.alive) {
+                isPlaying = true
+            }
+        }
+        return isPlaying
+    }
+
+    fun getPlayerWithRole(role: Int): Int {
+        var playerWithRole = 1
+        for (player in 1..playersMap.size) {
+            if (playersMap[player]!!.role == role) {
+                playerWithRole = player
+            }
+        }
+        return playerWithRole
+    }
+
+    protected fun getIfCurrentPartIsVoting(): Boolean {
+        return gameData.currentPart == GameFlowConstants.LAST_WORDS_AFTER_VOTING
+    }
+
+    fun addVoteToPlayer(player: Int) {
+        playersMap[player]!!.votesAmount++
+    }
+
+    fun removeVoteFromPlayer(player: Int) {
+        if (playersMap[player]!!.votesAmount > 0) {
+            playersMap[player]!!.votesAmount--
+        }
+    }
+
+    fun executePlayerWithMostVotes() {
+        val playerToBeExecuted = getPlayerWithMostVotes()
+        clearTheVotes()
+        killThePlayer(playerToBeExecuted)
+        if (checkIfTheGameIsFinished()) {
+            activity.finishTheGame()
+        }
+    }
+
     private fun clearTheVotes() {
         for (player in 1..playersMap.size) {
             playersMap[player]!!.votesAmount = 0
@@ -128,6 +149,22 @@ open class GameModel(
         playersMap[playerNumber]!!.alive = false
         gameData.killedPlayersList.add(playerNumber)
         gameData.isSomebodyKilled = true
+    }
+
+    private fun removeHealStreaks(playerToBeLeft: Int) {
+        for (player in 1..playersMap.size) {
+            if (player != playerToBeLeft) {
+                playersMap[player]!!.wasHealedByDoctorTheLastNight = false
+            }
+        }
+    }
+
+    private fun removeBlockStreaks(playerToBeLeft: Int) {
+        for (player in 1..playersMap.size) {
+            if (player != playerToBeLeft) {
+                playersMap[player]!!.blocksStreak = 0
+            }
+        }
     }
 
     fun chooseThePlayer(playerNumber: Int) {
@@ -153,48 +190,6 @@ open class GameModel(
             }
         }
         setTheNextPart()
-    }
-
-    private fun removeHealStreaks(playerToBeLeft: Int) {
-        for (player in 1..playersMap.size) {
-            if (player != playerToBeLeft) {
-                playersMap[player]!!.wasHealedByDoctorTheLastNight = false
-            }
-        }
-    }
-
-    private fun removeBlockStreaks(playerToBeLeft: Int) {
-        for (player in 1..playersMap.size) {
-            if (player != playerToBeLeft) {
-                playersMap[player]!!.blocksStreak = 0
-            }
-        }
-    }
-
-    //returns true only if player of asked role exists AND is alive
-    fun isPlayerWithRolePlaying(role: Int): Boolean {
-        var isPlaying = false
-        for (player in 1..playersMap.size) {
-            val playerInfo = playersMap[player]
-            if (playerInfo!!.role == role && playerInfo.alive) {
-                isPlaying = true
-            }
-        }
-        return isPlaying
-    }
-
-    fun findPlayerWithRole(role: Int): Int {
-        var playerWithRole = 1
-        for (player in 1..playersMap.size) {
-            if (playersMap[player]!!.role == role) {
-                playerWithRole = player
-            }
-        }
-        return playerWithRole
-    }
-
-    protected fun isVoting(): Boolean {
-        return gameData.currentPart == GameFlowConstants.LAST_WORDS_AFTER_VOTING
     }
 
     //Since I want killing roles to be able to kill themselves
@@ -239,18 +234,23 @@ open class GameModel(
         return playersMap[playerNumber]!!.alive
     }
 
-    private fun checkIfPlayerWithRoleExists(role: Int): Boolean {
-        for (player in 1..playersMap.size) {
-            if (playersMap[player]!!.role == role) {
-                return true
+    protected fun sumUpNightResult() {
+        for (player in 1 until gameData.playersMap.size) {
+            val playerData = gameData.playersMap[player]
+            if (playerData!!.isToBeDead && !playerData.isToBeHealed && playerData.alive) {
+                playerData.alive = false
+                gameData.killedPlayersList.add(player)
+                Log.i("DEAD", player.toString())
             }
         }
-        return false
+        if (checkIfTheGameIsFinished()) {
+            activity.finishTheGame()
+        }
     }
 
     //returns that the game is finished if amount of black players equals
     //the amount of red players and if maniac and doctor are not on the table
-    protected fun checkIfTheGameIsFinished(): Boolean {
+    private fun checkIfTheGameIsFinished(): Boolean {
         var amountOfBlackPlayers = 0
         for (player in 1..playersMap.size) {
             if (playersMap[player]!!.alive) {
@@ -265,8 +265,8 @@ open class GameModel(
         val amountOfRedPlayers = getAlivePlayersAmount() - amountOfBlackPlayers
         if (amountOfRedPlayers / amountOfBlackPlayers == 1 &&
             amountOfRedPlayers % amountOfBlackPlayers == 0 &&
-            checkIfPlayerWithRoleExists(Constants.MANIAC) &&
-            checkIfPlayerWithRoleExists(Constants.DOCTOR)
+            getIfAPlayerWithRolePlaying(Constants.MANIAC) &&
+            getIfAPlayerWithRolePlaying(Constants.DOCTOR)
         ) {
             gameData.winner = Constants.MAFIA_WINNER
             return true

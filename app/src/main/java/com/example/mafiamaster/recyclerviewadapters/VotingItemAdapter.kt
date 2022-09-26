@@ -1,6 +1,7 @@
 package com.example.mafiamaster.recyclerviewadapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,7 @@ class VotingItemAdapter(
         viewType: Int
     ): ViewHolder {
         binding = RowVotingItemBinding.inflate(LayoutInflater.from(context))
-        playersMap = gameModelView.getCurrentPlayersMap()
+        playersMap = gameModelView.getCurrentGameData().playersMap
         return ViewHolder(
             binding.root, binding
         )
@@ -38,6 +39,7 @@ class VotingItemAdapter(
         holder.votesCountTextView.text = player.votesAmount.toString()
         holder.ivAddVotes.setOnClickListener {
             gameModelView.addVoteToPlayer(playerNumber)
+            Log.i("ADD VOTE TO PLAYER", playerNumber.toString())
             notifyItemChanged(position)
         }
         holder.ivRemoveVotes.setOnClickListener {
@@ -52,11 +54,11 @@ class VotingItemAdapter(
     }
 
     override fun getItemCount(): Int {
-        return gameModelView.getCurrentPlayersMap().size
+        return gameModelView.getCurrentGameData().playersMap.size
     }
 
     private fun getPlayer(playerNumber: Int): Player{
-        return gameModelView.getCurrentPlayersMap()[playerNumber]!!
+        return gameModelView.getCurrentGameData().playersMap[playerNumber]!!
     }
 
     inner class ViewHolder(view: View, binding: RowVotingItemBinding) : RecyclerView.ViewHolder(view) {

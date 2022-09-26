@@ -47,7 +47,7 @@ class NightActionItemAdapter(
     }
 
     override fun getItemCount(): Int {
-        return gameModelView.getCurrentPlayersMap().size
+        return gameModelView.getCurrentGameData().playersMap.size
     }
 
     inner class ViewHolder(view: View, binding: RowNightActionItemBinding) :

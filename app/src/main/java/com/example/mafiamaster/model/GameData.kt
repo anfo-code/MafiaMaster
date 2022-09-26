@@ -3,7 +3,7 @@ package com.example.mafiamaster.model
 import com.example.mafiamaster.constants.GameFlowConstants
 
 data class GameData (
-    var currentPlayersMap: HashMap<Int, Player>,
+    var playersMap: HashMap<Int, Player>,
     var isGameOver: Boolean = false,
     var currentPart: Int = GameFlowConstants.NIGHT_OF_GETTING_ACQUAINTANCES,
     var isSomebodyKilled: Boolean = false,

@@ -1,8 +1,6 @@
 package com.example.mafiamaster.modelview
 
-import android.util.Log
 import com.example.mafiamaster.activities.GameActivity
-import com.example.mafiamaster.constants.Constants
 import com.example.mafiamaster.constants.GameFlowConstants
 import com.example.mafiamaster.model.GameModel
 import com.example.mafiamaster.model.Player
@@ -74,6 +72,23 @@ class GameModelView(
         }
     }
 
+    fun timerFinished() {
+        when (gameData.currentPart) {
+            GameFlowConstants.TALK -> {
+                goToTheNextPart()
+            }
+            GameFlowConstants.SPEECHES -> {
+                if (gameData.playerSpeakingCount == getAlivePlayersAmount() + gameData.round - 1) {
+                    gameData.playerSpeakingCount -= getAlivePlayersAmount() - gameData.round
+                    gameData.round++
+                    goToTheNextPart()
+                } else {
+                    nextPlayerSpeech()
+                }
+            }
+        }
+    }
+
     fun goToThePartAfterGettingAcquaintances() {
         setTalkPart()
         startCurrentPart()
@@ -99,9 +114,14 @@ class GameModelView(
         activity.startCurrentPlayerSpeech()
     }
 
+    private fun nextPlayerSpeech() {
+        gameData.playerSpeaking = getPlayerByCount()
+        activity.startCurrentPlayerSpeech()
+    }
+
     private fun setFirstSpeaker() {
-        for (player in gameData.round until gameData.currentPlayersMap.size) {
-            if (gameData.currentPlayersMap[player]!!.alive) {
+        for (player in gameData.round until gameData.playersMap.size) {
+            if (gameData.playersMap[player]!!.alive) {
                 gameData.playerSpeaking = player
                 break
             }
@@ -114,23 +134,9 @@ class GameModelView(
         activity.showVotingAction()
     }
 
-    private fun sumUpNightResult() {
-        for (player in 1 until gameData.currentPlayersMap.size) {
-            val playerData = gameData.currentPlayersMap[player]
-            if (playerData!!.isToBeDead && !playerData.isToBeHealed && playerData.alive) {
-                playerData.alive = false
-                gameData.killedPlayersList.add(player)
-                Log.i("DEAD", player.toString())
-            }
-        }
-        if (checkIfTheGameIsFinished()) {
-            activity.finishTheGame()
-        }
-    }
-
     private fun startLastWords() {
         activity.hideAllActions()
-        activity.showKilledPlayersRoleAction(isVoting())
+        activity.showKilledPlayersRoleAction(getIfCurrentPartIsVoting())
     }
 
     private fun startNight() {
@@ -162,22 +168,5 @@ class GameModelView(
 
     private fun finishTheGame() {
 
-    }
-
-    fun timerFinished() {
-        when (gameData.currentPart) {
-            GameFlowConstants.TALK -> {
-                goToTheNextPart()
-            }
-            GameFlowConstants.SPEECHES -> {
-                if (gameData.playerSpeakingCount == getAlivePlayersAmount() + gameData.round - 1) {
-                    gameData.playerSpeakingCount -= getAlivePlayersAmount() - gameData.round
-                    gameData.round++
-                    goToTheNextPart()
-                } else {
-                    nextPlayerSpeech()
-                }
-            }
-        }
     }
 }
