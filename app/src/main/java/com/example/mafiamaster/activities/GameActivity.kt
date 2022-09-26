@@ -169,7 +169,7 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
             binding.killedPlayerRoleButton.text = getString(R.string.start_the_talk)
         }
     }
-    
+
     //TODO debug night actions (doesn't move on from mafia)
     //TODO add checked player's role showing
     //TODO reformat the list in RolesActivity
