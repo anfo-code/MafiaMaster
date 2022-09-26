@@ -69,7 +69,7 @@ open class GameModel(
     private fun getPlayerWithMostVotes(): Int {
         //Start comparing from the first alive player
         var numberOfPlayerWithMostVotes = 1
-        for (player in 1 until playersMap.size + 1) {
+        for (player in 1..playersMap.size) {
             Log.i("PLAYER", "$player votes ${playersMap[player]!!.votesAmount}")
             if (playersMap[numberOfPlayerWithMostVotes]!!.votesAmount
                 < playersMap[player]!!.votesAmount
@@ -77,7 +77,7 @@ open class GameModel(
                 numberOfPlayerWithMostVotes = player
             }
         }
-        for (player in 1 until playersMap.size - 1) {
+        for (player in 1..playersMap.size) {
             playersMap[player]!!.votesAmount = 0
         }
 
@@ -133,7 +133,7 @@ open class GameModel(
     fun executePlayerWithMostVotes() {
         val playerToBeExecuted = getPlayerWithMostVotes()
         clearTheVotes()
-        killThePlayer(playerToBeExecuted)
+        eliminateThePlayer(playerToBeExecuted)
         if (checkIfTheGameIsFinished()) {
             activity.finishTheGame()
         }
@@ -145,14 +145,19 @@ open class GameModel(
         }
     }
 
-    protected fun killThePlayer(playerNumber: Int) {
+    private fun eliminateThePlayer(playerNumber: Int) {
         playersMap[playerNumber]!!.alive = false
         gameData.killedPlayersList.add(playerNumber)
+    }
+
+    protected fun killThePlayer(playerNumber: Int) {
+        playersMap[playerNumber]!!.isToBeDead = true
     }
 
     protected fun healThePlayer(playerNumber: Int) {
         playersMap[playerNumber]!!.isToBeHealed = true
         playersMap[playerNumber]!!.wasHealedByDoctorTheLastNight = true
+        gameData.killedPlayersList.remove(playerNumber)
         removeHealStreaks(playerNumber)
     }
 
@@ -226,11 +231,13 @@ open class GameModel(
     }
 
     protected fun sumUpNightResult() {
-        for (player in 1 until gameData.playersMap.size) {
+        for (player in 1..gameData.playersMap.size) {
             val playerData = gameData.playersMap[player]
+            Log.i("PLAYER $player DEAD",
+                { playerData!!.isToBeDead && !playerData.isToBeHealed && playerData.alive }.toString()
+            )
             if (playerData!!.isToBeDead && !playerData.isToBeHealed && playerData.alive) {
-                playerData.alive = false
-                gameData.killedPlayersList.add(player)
+                eliminateThePlayer(player)
                 Log.i("DEAD", player.toString())
             }
         }
