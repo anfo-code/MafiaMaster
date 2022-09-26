@@ -145,12 +145,28 @@ open class GameModel(
         }
     }
 
-    private fun killThePlayer(playerNumber: Int) {
+    protected fun killThePlayer(playerNumber: Int) {
         playersMap[playerNumber]!!.alive = false
         gameData.killedPlayersList.add(playerNumber)
-        gameData.isSomebodyKilled = true
     }
 
+    protected fun healThePlayer(playerNumber: Int) {
+        playersMap[playerNumber]!!.isToBeHealed = true
+        playersMap[playerNumber]!!.wasHealedByDoctorTheLastNight = true
+        removeHealStreaks(playerNumber)
+    }
+
+    protected fun payVisitToPlayer(playerNumber: Int) {
+        playersMap[playerNumber]!!.isToBeBlocked = true
+        playersMap[playerNumber]!!.blocksStreak++
+        removeBlockStreaks(playerNumber)
+    }
+
+    protected fun checkThePlayer(playerNumber: Int) {
+        playersMap[playerNumber]!!.isChecked = true
+    }
+
+    //Removes heal streaks except for the entered player
     private fun removeHealStreaks(playerToBeLeft: Int) {
         for (player in 1..playersMap.size) {
             if (player != playerToBeLeft) {
@@ -165,31 +181,6 @@ open class GameModel(
                 playersMap[player]!!.blocksStreak = 0
             }
         }
-    }
-
-    fun chooseThePlayer(playerNumber: Int) {
-        when (gameData.currentPart) {
-            GameFlowConstants.MAFIA_KILLS -> {
-                playersMap[playerNumber]!!.isToBeDead = true
-            }
-            GameFlowConstants.MISTRESS_PAYS_A_VISIT -> {
-                playersMap[playerNumber]!!.isToBeBlocked = true
-                playersMap[playerNumber]!!.blocksStreak++
-                removeBlockStreaks(playerNumber)
-            }
-            GameFlowConstants.DOCTOR_HEALS -> {
-                playersMap[playerNumber]!!.isToBeHealed = true
-                playersMap[playerNumber]!!.wasHealedByDoctorTheLastNight = true
-                removeHealStreaks(playerNumber)
-            }
-            GameFlowConstants.MANIAC_KILLS -> {
-                playersMap[playerNumber]!!.isToBeDead = true
-            }
-            GameFlowConstants.SHERIFF_CHECKS -> {
-                playersMap[playerNumber]!!.isChecked = true
-            }
-        }
-        setTheNextPart()
     }
 
     //Since I want killing roles to be able to kill themselves

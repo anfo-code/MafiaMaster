@@ -146,6 +146,27 @@ class GameModelView(
         goToTheNextPart()
     }
 
+    fun chooseThePlayer(playerNumber: Int) {
+        when (gameData.currentPart) {
+            GameFlowConstants.MAFIA_KILLS -> {
+                killThePlayer(playerNumber)
+            }
+            GameFlowConstants.MISTRESS_PAYS_A_VISIT -> {
+                payVisitToPlayer(playerNumber)
+            }
+            GameFlowConstants.DOCTOR_HEALS -> {
+                healThePlayer(playerNumber)
+            }
+            GameFlowConstants.MANIAC_KILLS -> {
+                killThePlayer(playerNumber)
+            }
+            GameFlowConstants.SHERIFF_CHECKS -> {
+                checkThePlayer(playerNumber)
+            }
+        }
+        goToTheNextPart()
+    }
+
     private fun startMafiaAction() {
         activity.showMafiaAction()
     }

@@ -170,7 +170,6 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
         }
     }
 
-    //TODO debug night actions (doesn't move on from mafia)
     //TODO add checked player's role showing
     //TODO reformat the list in RolesActivity
     //TODO create GameFinishActivity
