@@ -16,6 +16,7 @@
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.11" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_mafia.xml" value="0.2105" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_maniac.xml" value="0.1535" />
+        <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_mistress.xml" value="0.2105" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_pause.xml" value="0.2085" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_play.xml" value="0.1535" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/drawable/ic_remove.xml" value="0.2085" />
@@ -32,6 +33,7 @@
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_roles.xml" value="0.21927083333333333" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_rules.xml" value="0.136" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/activity_settings.xml" value="0.21927083333333333" />
+        <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/dialog_checked_players_role.xml" value="0.264" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/row_night_action_item.xml" value="0.19791666666666666" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/row_voting.xml" value="0.19791666666666666" />
         <entry key="..\:/AndroidApplications/MyOwnProjects/MafiaMaster/app/src/main/res/layout/row_voting_item.xml" value="0.19791666666666666" />

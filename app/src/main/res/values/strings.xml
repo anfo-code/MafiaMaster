@@ -61,4 +61,8 @@
     <string name="end_the_night_of_getting_acquaintances">Закінчити ніч знайомств</string>
     <string name="black_players_get_acquaintances">Чорні гравці знайомляться</string>
     <string name="choose">Обрати</string>
+    <string name="checked_player_is">Перевірений гравець є</string>
+    <string name="black_player">Чорний гравець</string>
+    <string name="red_player">Червоний гравець</string>
+    <string name="end_the_night">Закінчити ніч</string>
 </resources>

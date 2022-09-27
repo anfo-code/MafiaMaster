@@ -171,10 +171,9 @@ class GameActivity : BaseForActivities(), View.OnClickListener {
     }
 
     //TODO add checked player's role showing
-    //TODO reformat the list in RolesActivity
     //TODO create GameFinishActivity
     //TODO set the fouls action
-    //TODO fix display bugs
+    //TODO set up the app for different screen sizes
 
     private fun showActionOfMistressVisiting() {
         hideAllActions()
